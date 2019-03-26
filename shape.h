@@ -14,9 +14,9 @@ class Shape
 public:
     Shape();
 
-    auto getCenter();
-    auto getHeight();
-    auto getWidth();
+    pair<int, int> getCenter();
+    int getHeight();
+    int getWidth();
 private:
     pair<int, int> _center;
     int _height;

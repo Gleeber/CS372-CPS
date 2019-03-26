@@ -8,17 +8,17 @@ Shape::Shape():
     _center(312, 396), _height(72), _width(72)
 {}
 
-auto Shape::getCenter()
+pair<int, int> Shape::getCenter()
+{
+    return _center;
+}
+
+int Shape::getHeight()
 {
     return 0;
 }
 
-auto Shape::getHeight()
-{
-    return 0;
-}
-
-auto Shape::getWidth()
+int Shape::getWidth()
 {
     return 0;
 }
