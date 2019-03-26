@@ -4,7 +4,6 @@
 
 #include "shape.h"
 
-Shape::Shape()
-{
-
-}
+Shape::Shape():
+    _center(312, 396), _height(72), _width(72)
+{}
