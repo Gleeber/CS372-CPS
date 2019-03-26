@@ -20,5 +20,5 @@ int Shape::getHeight()
 
 int Shape::getWidth()
 {
-    return 0;
+    return _width;
 }
