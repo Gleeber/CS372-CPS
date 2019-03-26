@@ -28,6 +28,8 @@ class Circle : public Shape
 public:
     Circle();
 
+    int getRadius();
+
 private:
     int _radius;
 };

@@ -32,3 +32,8 @@ int Shape::getWidth()
 Circle::Circle():
     _radius(getHeight() / 2)
 {}
+
+int Circle::getRadius()
+{
+    return _radius;
+}
