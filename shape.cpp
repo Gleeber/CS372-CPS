@@ -5,7 +5,7 @@
 #include "shape.h"
 
 Shape::Shape():
-    _center(312, 396), _height(72), _width(72)
+    _center(306, 396), _height(72), _width(72)
 {}
 
 pair<int, int> Shape::getCenter()
