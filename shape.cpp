@@ -15,7 +15,7 @@ pair<int, int> Shape::getCenter()
 
 int Shape::getHeight()
 {
-    return 0;
+    return _height;
 }
 
 int Shape::getWidth()
