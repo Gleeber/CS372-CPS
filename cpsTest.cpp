@@ -21,4 +21,8 @@ TEST_CASE("Test for Shape class:") {
 TEST_CASE("Test for Circle class:")
 {
 	Circle testCircle;
+
+	REQUIRE(testCircle.getCenter() == std::make_pair(306, 396));
+	REQUIRE(testCircle.getHeight() == 72);
+	REQUIRE(testCircle.getWidth() == 72);
 }
