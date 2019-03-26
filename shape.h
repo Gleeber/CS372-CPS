@@ -6,13 +6,17 @@
 #define CS372_CPS_SHAPE_H
 
 #include <iostream>
+#include <utility>
+using std::pair;
 
 class Shape
 {
 public:
     Shape();
 private:
-    std::ostream file;
+    pair<int, int> _center;
+    int _height;
+    int _width;
 };
 
 #endif //CS372_CPS_SHAPE_H

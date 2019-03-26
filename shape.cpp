@@ -6,5 +6,5 @@
 
 Shape::Shape()
 {
-    
+
 }
