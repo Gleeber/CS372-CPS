@@ -12,3 +12,8 @@ auto Shape::getCenter()
 {
     return 0;
 }
+
+auto Shape::getHeight()
+{
+    return 0;
+}
