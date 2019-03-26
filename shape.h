@@ -16,6 +16,7 @@ public:
 
     auto getCenter();
     auto getHeight();
+    auto getWidth();
 private:
     pair<int, int> _center;
     int _height;

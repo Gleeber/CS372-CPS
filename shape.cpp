@@ -17,3 +17,8 @@ auto Shape::getHeight()
 {
     return 0;
 }
+
+auto Shape::getWidth()
+{
+    return 0;
+}
