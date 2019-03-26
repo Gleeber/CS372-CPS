@@ -23,4 +23,11 @@ private:
     int _width;
 };
 
+class Circle : public Shape
+{
+public:
+private:
+    int _radius;
+};
+
 #endif //CS372_CPS_SHAPE_H
