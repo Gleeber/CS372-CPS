@@ -13,6 +13,8 @@ class Shape
 {
 public:
     Shape();
+
+    auto getCenter();
 private:
     pair<int, int> _center;
     int _height;
