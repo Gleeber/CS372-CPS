@@ -14,8 +14,8 @@ using std::pair;
 TEST_CASE("Test for shape class:") {
 	Shape testShape;
 	REQUIRE(testShape.getMidPoint() == auto std::make_pair(306, 396));
-	REQUIRE(testShap.getHeight() == auto 72);
-	REQUIRE(testShap.getWidth() == auto 72);
+	REQUIRE(testShape.getHeight() == auto 72);
+	REQUIRE(testShape.getWidth() == auto 72);
 	SECTION("") {
 		
 	}
