@@ -10,6 +10,7 @@
 class Shape
 {
 public:
+    Shape();
 private:
     std::ostream file;
 };
