@@ -13,10 +13,7 @@ using std::pair;
 
 TEST_CASE("Test for shape class:") {
 	Shape testShape;
-	REQUIRE(testShape.getCenter() == auto std::make_pair(306, 396));
-	REQUIRE(testShape.getHeight() == auto 72);
-	REQUIRE(testShape.getWidth() == auto 72);
-	SECTION("") {
-		
-	}
+	REQUIRE(testShape.getCenter() == std::make_pair(306, 396));
+	REQUIRE(testShape.getHeight() == 72);
+	REQUIRE(testShape.getWidth() == 72);
 }
