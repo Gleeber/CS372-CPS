@@ -4,6 +4,8 @@
 
 #include "shape.h"
 
+// ****************************** Shape Class ******************************
+
 Shape::Shape():
     _center(306, 396), _height(72), _width(72)
 {}
@@ -22,3 +24,11 @@ int Shape::getWidth()
 {
     return _width;
 }
+
+
+
+// ****************************** Circle Class ******************************
+
+Circle::Circle():
+    _radius(getHeight() / 2)
+{}

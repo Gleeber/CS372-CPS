@@ -26,6 +26,8 @@ private:
 class Circle : public Shape
 {
 public:
+    Circle();
+
 private:
     int _radius;
 };
