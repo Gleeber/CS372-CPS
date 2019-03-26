@@ -11,9 +11,14 @@
 #include <utility>
 using std::pair;
 
-TEST_CASE("Test for shape class:") {
+TEST_CASE("Test for Shape class:") {
 	Shape testShape;
 	REQUIRE(testShape.getCenter() == std::make_pair(306, 396));
 	REQUIRE(testShape.getHeight() == 72);
 	REQUIRE(testShape.getWidth() == 72);
+}
+
+TEST_CASE("Test for Circle class:")
+{
+	Circle testCircle;
 }
