@@ -32,17 +32,15 @@ TEST_CASE("Test for Circle class:")
 }
 
 TEST_CASE("Test for Rectangle class:") {
-<<<<<<< HEAD
 	Rectangle testRectangle;
 	REQUIRE(testRectangle.getCenter() == std::make_pair(306, 396));
 	REQUIRE(testRectangle.getHeight() == 72);
 	REQUIRE(testRectangle.getWidth() == 144);
-=======
+
 	SECTION("Test default constructor:") {
 		Rectangle testRectangle;
 		REQUIRE(testShape.getCenter() == std::make_pair(306, 396));
 		REQUIRE(testShape.getHeight() == 72);
 		REQUIRE(testShape.getWidth() == 144);
 	}
->>>>>>> 50efeaec9b2a133a5fc2c9ccd580661b01dee3f5
 }
