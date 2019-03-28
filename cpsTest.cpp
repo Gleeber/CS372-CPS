@@ -14,9 +14,12 @@ using std::pair;
 TEST_CASE("Test for Shape class:") {
 	SECTION("Test default constructor:") {
 		Shape testShape;
-		REQUIRE(testShape.getCenter() == std::make_pair(306, 396));
+		REQUIRE(testShape.getCenter() == std::make_pair(306.0, 396.0));
 		REQUIRE(testShape.getHeight() == 72);
 		REQUIRE(testShape.getWidth() == 72);
+	}
+	SECTION("Test ") {
+
 	}
 }
 
@@ -24,7 +27,7 @@ TEST_CASE("Test for Circle class:")
 {
 	SECTION("Test default constructor:") {
 		Circle testCircle;
-		REQUIRE(testCircle.getCenter() == std::make_pair(306, 396));
+		REQUIRE(testCircle.getCenter() == std::make_pair(306.0, 396.0));
 		REQUIRE(testCircle.getHeight() == 72);
 		REQUIRE(testCircle.getWidth() == 72);
 		REQUIRE(testCircle.getRadius() == 36);
@@ -32,15 +35,28 @@ TEST_CASE("Test for Circle class:")
 }
 
 TEST_CASE("Test for Rectangle class:") {
-	Rectangle testRectangle;
-	REQUIRE(testRectangle.getCenter() == std::make_pair(306, 396));
-	REQUIRE(testRectangle.getHeight() == 72);
-	REQUIRE(testRectangle.getWidth() == 144);
-
 	SECTION("Test default constructor:") {
-		Rectangle testRectangle;
-		REQUIRE(testShape.getCenter() == std::make_pair(306, 396));
-		REQUIRE(testShape.getHeight() == 72);
-		REQUIRE(testShape.getWidth() == 144);
+		//Rectangle testRectangle;
+		//REQUIRE(testRectangle.getCenter() == std::make_pair(306, 396));
+		//REQUIRE(testRectangle.getHeight() == 72);
+		//REQUIRE(testRectangle.getWidth() == 144);
+	}
+}
+
+TEST_CASE("Test for Triangle:") {
+	SECTION("Test default constructor:") {
+		//Triangle testTriangle;
+		//REQUIRE(testTriangle.getCenter() == std::make_pair(306, 396));
+		//REQUIRE(testTriangle.getHeight() == 72);
+		//REQUIRE(testTriangle.getWidth() == 72);
+	}
+}
+
+TEST_CASE("Test for Square:") {
+	SECTION("Test default constructor") {
+		//Square testSquare;
+		//REQUIRE(testSquare.getCenter() == std::make_pair(306, 396));
+		//REQUIRE(testSquare.getHeight() == 72);
+		//REQUIRE(testSquare.getWidth() == 72);
 	}
 }
