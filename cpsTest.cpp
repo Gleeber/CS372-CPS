@@ -27,3 +27,11 @@ TEST_CASE("Test for Circle class:")
 	REQUIRE(testCircle.getWidth() == 72);
 	REQUIRE( testCircle.getRadius() == 36 );
 }
+
+TEST_CASE("Test for Rectangle class:") {
+	Rectangle testRectangle;
+
+	REQUIRE(testShape.getCenter() == std::make_pair(306, 396));
+	REQUIRE(testShape.getHeight() == 72);
+	REQUIRE(testShape.getWidth() == 144);
+}
