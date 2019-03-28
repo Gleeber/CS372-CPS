@@ -25,6 +25,11 @@ int Shape::getWidth()
     return _width;
 }
 
+void Shape::setCenter(int x, int y)
+{
+    _center=std::make_pair(x, y);
+}
+
 
 
 // ****************************** Circle Class ******************************
@@ -37,3 +42,9 @@ int Circle::getRadius()
 {
     return _radius;
 }
+
+// ****************************** Rectangle Class ******************************
+
+Rectangle::Rectangle()
+{}
+

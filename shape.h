@@ -17,6 +17,9 @@ public:
     pair<int, int> getCenter();
     int getHeight();
     int getWidth();
+    void setHeight();
+    void setWidth();
+    void setCenter(int x, int y);
 private:
     pair<int, int> _center;
     int _height;
@@ -32,6 +35,15 @@ public:
 
 private:
     int _radius;
+};
+
+class Rectangle: public Shape{
+public:
+    Rectangle();
+
+
+private:
+
 };
 
 #endif //CS372_CPS_SHAPE_H
