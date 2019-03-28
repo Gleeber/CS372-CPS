@@ -14,16 +14,16 @@ class Shape
 public:
     Shape();
 
-    pair<int, int> getCenter();
-    int getHeight();
-    int getWidth();
+    pair<double, double> getCenter();
+    double getHeight();
+    double getWidth();
     void setHeight();
     void setWidth();
-    void setCenter(int x, int y);
+    void setCenter(double x, double y);
 private:
-    pair<int, int> _center;
-    int _height;
-    int _width;
+    pair<double, double> _center;
+    double _height;
+    double _width;
 };
 
 class Circle : public Shape
@@ -31,10 +31,10 @@ class Circle : public Shape
 public:
     Circle();
 
-    int getRadius();
+    double getRadius();
 
 private:
-    int _radius;
+    double _radius;
 };
 
 class Rectangle: public Shape{
