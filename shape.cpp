@@ -30,6 +30,15 @@ void Shape::setCenter(double x, double y)
     _center=std::make_pair(x, y);
 }
 
+void Shape::setHeight(double num)
+{
+    _height = num;
+}
+
+void Shape::setWidth(double num)
+{
+    _width = num;
+}
 
 
 // ****************************** Circle Class ******************************

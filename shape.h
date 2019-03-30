@@ -17,8 +17,8 @@ public:
     pair<double, double> getCenter();
     double getHeight();
     double getWidth();
-    void setHeight();
-    void setWidth();
+    void setHeight(double num);
+    void setWidth(double num);
     void setCenter(double x, double y);
 private:
     pair<double, double> _center;
