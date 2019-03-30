@@ -18,8 +18,9 @@ TEST_CASE("Test for Shape class:") {
 		REQUIRE(testShape.getHeight() == 72);
 		REQUIRE(testShape.getWidth() == 72);
 	}
-	SECTION("Test ") {
-
+	SECTION("Test getHeight:") {
+		Shape testShape;
+		REQUIRE(testShape.getHeight() == 72);
 	}
 }
 
