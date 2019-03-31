@@ -58,12 +58,13 @@ TEST_CASE("Test for Circle class:")
 	}
 }
 
-TEST_CASE("Test for Rectangle class:") {
+TEST_CASE("Test for Rectangle class:")
+{
 	SECTION("Test default constructor:") {
-		//Rectangle testRectangle;
-		//REQUIRE(testRectangle.getCenter() == make_pair(306, 396));
-		//REQUIRE(testRectangle.getHeight() == 72);
-		//REQUIRE(testRectangle.getWidth() == 144);
+		Rectangle testRectangle;
+		REQUIRE(testRectangle.getCenter() == make_pair(306, 396));
+		REQUIRE(testRectangle.getHeight() == 72);
+		REQUIRE(testRectangle.getWidth() == 144);
 	}
 }
 
