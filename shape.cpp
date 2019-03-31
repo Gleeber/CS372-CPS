@@ -107,7 +107,8 @@ Rectangle::Rectangle()
 
 Rectangle::Rectangle(double width, double height)
 {
-    
+    setWidth(width);
+    setHeight(height);
 }
 
 // *********************************************************************
