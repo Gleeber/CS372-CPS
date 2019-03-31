@@ -9,6 +9,8 @@
 #include <fstream>
 #include <utility>
 using std::pair;
+#include <string>
+using std::string;
 
 class Shape
 {
@@ -23,12 +25,15 @@ public:
     void setCenter(double x, double y);
     void openfile(const char filename[]);
     void closefile();
+    virtual string generatePostScript();
+    void draw();
 protected:
     std::ofstream file;
 private:
     pair<double, double> _center;
     double _height;
     double _width;
+    string _filename;
 };
 
 class Circle : public Shape

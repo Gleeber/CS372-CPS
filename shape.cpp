@@ -3,6 +3,8 @@
 //
 
 #include "shape.h"
+#include <iostream>
+using std::ofstream;
 
 // ****************************** Shape Class ******************************
 
@@ -48,6 +50,19 @@ void Shape::openfile(const char *filename)
 void Shape::closefile()
 {
     file.close();
+}
+
+string Shape::generatePostScript()
+{
+    return std::string();
+}
+
+void Shape::draw()
+{
+    ofstream postScriptOutput;
+    postScriptOutput.open (_filename);
+    postScriptOutput << generatePostScript();
+    postScriptOutput.close();
 }
 
 
