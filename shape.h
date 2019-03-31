@@ -64,7 +64,11 @@ private:
     double _radius;
 };
 
-class Rectangle: public Shape
+// *********************************************************************
+// Rectangle class
+// *********************************************************************
+
+class Rectangle : public Shape
 {
 public:
     Rectangle();
@@ -72,6 +76,18 @@ public:
 
 private:
 
+};
+
+// *********************************************************************
+// Polygon class
+// *********************************************************************
+
+class Polygon : public Shape
+{
+public:
+    Polygon();
+
+private:
 };
 
 #endif //CS372_CPS_SHAPE_H
