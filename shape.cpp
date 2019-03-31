@@ -148,12 +148,13 @@ Polygon::Polygon():
         setHeight(_sideLength * cos(M_PI / _numberOfSides) / sin(M_PI / _numberOfSides));
         setWidth(_sideLength * cos(M_PI / _numberOfSides) / sin(M_PI / _numberOfSides));
     }
+    else  //case 3: n is divisible by 2, but not 4.
+    {
+        setHeight(_sideLength*(cos(M_PI/ _numberOfSides)) / (sin(M_PI/_numberOfSides)));
+        setWidth(_sideLength/(sin(M_PI/_numberOfSides)))
 
-    /*
-    Case 3: n is divisible by 2, but not by 4.
-    height = e(cos(π/n))/(sin(π/n))
-    width = e/(sin(π/n))
-     */
+    }
+    
 
 }
 
