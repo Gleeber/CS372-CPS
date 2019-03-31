@@ -90,6 +90,12 @@ TEST_CASE("Test for Rectangle class:")
 		REQUIRE(testRectangle.getHeight() == 72);
 		REQUIRE(testRectangle.getWidth() == 144);
 	}
+	SECTION("Test constructor that takes width and height as parameters: ")
+    {
+	    Rectangle testRectangle(96, 96);
+	    REQUIRE(testRectangle.getHeight() == 96);
+	    REQUIRE(testRectangle.getWidth() == 96);
+    }
 }
 
 TEST_CASE("Test for Polygon class:")
