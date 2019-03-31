@@ -116,14 +116,18 @@ Rectangle::Rectangle(double width, double height)
 
 string Rectangle::generatePostScript()
 {
-    return "newpath\n -" + std::to_string(getWidth()/2)
+    return "newpath\n"
+            + std::to_string(getCenter().first) + " "
+            + std::to_string(getCenter().second) + " moveto\n"
+
+            + "-" + std::to_string(getWidth()/2)
             + " -" + std::to_string(getHeight()/2) + " rmoveto\n"
-            + std::to_string(getWidth()) + " " + std::to_string(0)
-            + " rlineto\n" + std::to_string(0) + " "
-            + std::to_string(getHeight()) + " rlineto\n -"
-            + std::to_string(getWidth()) + " " + std::to_string(0)
-            + " rlineto\n" + std::to_string(0) + " -" + std::to_string(getHeight())
-            + " rlineto\n" + "closepath\n" + "stroke";
+
+            + std::to_string(getWidth()) + " 0 rlineto\n"
+            + "0 " + std::to_string(getHeight()) + " rlineto\n"
+            + "-" + std::to_string(getWidth()) + " 0 rlineto\n"
+            + "0 -" + std::to_string(getHeight()) + " rlineto\n"
+            + "stroke";
 }
 
 // *********************************************************************
