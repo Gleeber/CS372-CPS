@@ -93,6 +93,7 @@ public:
 
 private:
     int _numberOfSides;
+    double _sideLength;
 };
 
 #endif //CS372_CPS_SHAPE_H
