@@ -14,7 +14,7 @@ using std::cos;
 // *********************************************************************
 
 Shape::Shape():
-    _center(306, 396), _height(72), _width(72), _filename("../CS372-CPS/postScriptFile.ps")
+    _center(306, 396), _height(72), _width(72), _filename("postScriptFile.ps")
 {}
 
 pair<double, double> Shape::getCenter()
@@ -106,6 +106,24 @@ string Circle::generatePostScript()
 Rectangle::Rectangle()
 {
     setWidth(getWidth() * 2);
+}
+
+Rectangle::Rectangle(double width, double height)
+{
+    setWidth(width);
+    setHeight(height);
+}
+
+string Rectangle::generatePostScript()
+{
+    return "newpath\n -" + std::to_string(getWidth()/2)
+            + " -" + std::to_string(getHeight()/2) + " rmoveto\n"
+            + std::to_string(getWidth()) + " " + std::to_string(0)
+            + " rlineto\n" + std::to_string(0) + " "
+            + std::to_string(getHeight()) + " rlineto\n -"
+            + std::to_string(getWidth()) + " " + std::to_string(0)
+            + " rlineto\n" + std::to_string(0) + " -" + std::to_string(getHeight())
+            + " rlineto\n" + "closepath\n" + "stroke";
 }
 
 // *********************************************************************
