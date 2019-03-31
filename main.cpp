@@ -6,8 +6,6 @@
 
 int main()
 {
-//    Circle testCircle;
-//    testCircle.draw();
-    Rectangle testRectangle;
-    testRectangle.draw();
+    Polygon polygon;
+    polygon.draw();
 }
