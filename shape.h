@@ -72,6 +72,7 @@ class Rectangle : public Shape
 {
 public:
     Rectangle();
+    Rectangle(double width, double height);
 
 
 private:

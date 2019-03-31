@@ -105,6 +105,11 @@ Rectangle::Rectangle()
     setWidth(getWidth() * 2);
 }
 
+Rectangle::Rectangle(double width, double height)
+{
+    
+}
+
 // *********************************************************************
 // Polygon class definitions
 // *********************************************************************
