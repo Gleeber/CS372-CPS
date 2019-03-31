@@ -20,15 +20,20 @@ public:
     pair<double, double> getCenter();
     double getHeight();
     double getWidth();
+
     void setHeight(double num);
     void setWidth(double num);
     void setCenter(double x, double y);
+
     void openfile(const char filename[]);
     void closefile();
+
     virtual string generatePostScript();
     void draw();
+
 protected:
     std::ofstream file;
+
 private:
     pair<double, double> _center;
     double _height;
@@ -40,6 +45,7 @@ class Circle : public Shape
 {
 public:
     Circle();
+    Circle(double radius);
 
     double getRadius();
 
@@ -49,7 +55,8 @@ private:
     double _radius;
 };
 
-class Rectangle: public Shape{
+class Rectangle: public Shape
+{
 public:
     Rectangle();
 

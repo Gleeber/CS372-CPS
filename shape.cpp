@@ -72,6 +72,13 @@ Circle::Circle():
     _radius(getHeight() / 2)
 {}
 
+Circle::Circle(double radius):
+    _radius(radius)
+{
+    setHeight(_radius * 2);
+    setWidth( _radius * 2);
+}
+
 double Circle::getRadius()
 {
     return _radius;
