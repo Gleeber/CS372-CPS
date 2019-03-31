@@ -1,3 +1,5 @@
+#include <utility>
+
 //
 // Created by Ian Ferguson on 2019-03-26.
 //
@@ -169,8 +171,8 @@ string Polygon::generatePostScript()
            + std::to_string(getCenter().first) + " "
            + std::to_string(getCenter().second) + " moveto\n"
 
-           + "-" + std::to_string(getWidth()/2)
-           + " -" + std::to_string(getHeight()/2) + " rmoveto\n"
+           + "-" + std::to_string(getWidth() / 2)
+           + " -" + std::to_string(getHeight() / 2) + " rmoveto\n"
 
            + to_string(sin(360 / _numberOfSides) * _sideLength) + " 0 rmoveto\n"
 
@@ -180,4 +182,23 @@ string Polygon::generatePostScript()
            + "} for\n"
 
            + "stroke";
+}
+
+// *********************************************************************
+// Rotated class definitions
+// *********************************************************************
+
+Rotated::Rotated(std::shared_ptr<Shape> shape, int rotationAngle): _shape(std::move(shape)), _rotation(rotationAngle)
+{
+    if(rotationAngle == 0 || rotationAngle == 180)
+    {
+        setWidth(getWidth());
+        setHeight(getHeight());
+    }
+    else //Rotation angle is 90 or 270
+    {
+        setWidth(getHeight());
+        setHeight(getWidth());
+    }
+
 }
