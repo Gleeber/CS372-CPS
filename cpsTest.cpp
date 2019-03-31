@@ -92,6 +92,17 @@ TEST_CASE("Test for Rectangle class:")
 	}
 }
 
+TEST_CASE("Test for Polygon class:")
+{
+	SECTION("Test default constructor:")
+	{
+		Polygon testPolygon;
+		REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
+		REQUIRE(testPolygon.getHeight() == 72);
+		REQUIRE(testPolygon.getWidth() == 72);
+	}
+}
+
 TEST_CASE("Test for Triangle:") {
 	SECTION("Test default constructor:")
 	{
