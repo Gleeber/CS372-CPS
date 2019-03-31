@@ -109,5 +109,11 @@ Rectangle::Rectangle()
 // Polygon class definitions
 // *********************************************************************
 
-Polygon::Polygon()
+Polygon::Polygon():
+    _numberOfSides(5)
 {}
+
+int Polygon::getNumSides()
+{
+    return _numberOfSides;
+}

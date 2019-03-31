@@ -87,7 +87,10 @@ class Polygon : public Shape
 public:
     Polygon();
 
+    int getNumSides();
+
 private:
+    int _numberOfSides;
 };
 
 #endif //CS372_CPS_SHAPE_H
