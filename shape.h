@@ -75,7 +75,6 @@ public:
     Rectangle(double width, double height);
     virtual string generatePostScript() override;
 
-    virtual string generatePostScript() override;
 
 private:
 
@@ -98,5 +97,18 @@ private:
 };
 
 
+// *********************************************************************
+// Rotated class
+// *********************************************************************
+
+class Rotated : public Shape
+{
+public:
+    Rotated(std::shared_ptr<Shape> shape, int rotationAngle);
+    //virtual string generatePostScript() override;
+private:
+    std::shared_ptr<Shape> _shape;
+    int _rotation;
+};
 
 #endif //CS372_CPS_SHAPE_H

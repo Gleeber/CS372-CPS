@@ -1,3 +1,5 @@
+#include <utility>
+
 //
 // Created by Ian Ferguson on 2019-03-26.
 //
@@ -151,7 +153,7 @@ Polygon::Polygon():
     else  //case 3: n is divisible by 2, but not 4.
     {
         setHeight(_sideLength*(cos(M_PI/ _numberOfSides)) / (sin(M_PI/_numberOfSides)));
-        setWidth(_sideLength/(sin(M_PI/_numberOfSides)))
+        setWidth(_sideLength/(sin(M_PI/_numberOfSides)));
 
     }
     
@@ -161,4 +163,23 @@ Polygon::Polygon():
 int Polygon::getNumSides()
 {
     return _numberOfSides;
+}
+
+// *********************************************************************
+// Rotated class definitions
+// *********************************************************************
+
+Rotated::Rotated(std::shared_ptr<Shape> shape, int rotationAngle): _shape(std::move(shape)), _rotation(rotationAngle)
+{
+    if(rotationAngle == 0 || rotationAngle == 180)
+    {
+        setWidth(getWidth());
+        setHeight(getHeight());
+    }
+    else //Rotation angle is 90 or 270
+    {
+        setWidth(getHeight());
+        setHeight(getWidth());
+    }
+
 }
