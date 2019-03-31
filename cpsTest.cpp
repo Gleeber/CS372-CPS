@@ -18,10 +18,15 @@ TEST_CASE("Test for Shape class:") {
 		REQUIRE(testShape.getHeight() == 72);
 		REQUIRE(testShape.getWidth() == 72);
 	}
-	SECTION("Test getHeight:") {
+	SECTION("Test getHeight():") {
 		Shape testShape;
 		REQUIRE(testShape.getHeight() == 72);
 	}
+	SECTION("Test getWidth():") {
+		Shape testShape;
+		REQUIRE(testShape.getWidth() == 72);
+	}
+
 }
 
 TEST_CASE("Test for Circle class:")
