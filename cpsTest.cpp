@@ -13,6 +13,7 @@
 using std::make_pair;
 #include <cmath>
 using std::sqrt;
+using std::make_shared;
 
 TEST_CASE("Test for Shape class:") {
 	SECTION("Test default constructor:")
@@ -148,5 +149,19 @@ TEST_CASE("Test for Pentagon:") {
 		//REQUIRE(testDefaultPolygon.getCenter() == make_pair(306, 396));
 		//REQUIRE(testDefaultPolygon.getHeight() == 72);
 		//REQUIRE(testDefaultPolygon.getWidth() == 72);
+	}
+}
+TEST_CASE("Compound Shapes:")
+{
+	Circle circle(5.0);
+	SECTION("Rotated")
+	{
+		//Circle
+		Rotated shape1(make_shared<Circle> circle, 0);
+		Rotated shape2(make_shared<Circle> circle, 90);
+		Rotated shape3(make_shared<Circle> circle, 180);
+		Rotated shape4(make_shared<Circle> circle, 270);
+		Rotated shape5(make_shared<Circle> circle, 360);
+		//Rectangle
 	}
 }
