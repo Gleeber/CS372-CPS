@@ -11,6 +11,8 @@
 #include "shape.h"
 #include <utility>
 using std::make_pair;
+#include <cmath>
+using std::sqrt;
 
 TEST_CASE("Test for Shape class:") {
 	SECTION("Test default constructor:")
@@ -98,9 +100,18 @@ TEST_CASE("Test for Polygon class:")
 	{
 		Polygon testPolygon;
 		REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
-		REQUIRE(testPolygon.getHeight() == 72);
-		REQUIRE(testPolygon.getWidth() == 72);
+		REQUIRE(testPolygon.getHeight() == 25 * sqrt(5 + 2 * sqrt(5)));
+		REQUIRE(testPolygon.getWidth() == 25 * (1 + sqrt(5)));
 		REQUIRE(testPolygon.getNumSides() == 5);
+	}
+
+	SECTION("Test Polygon constructor with number of sides:")
+	{
+		//Polygon testPolygon(6);
+		//REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
+		//REQUIRE(testPolygon.getHeight() == 72);
+		//REQUIRE(testPolygon.getWidth() == 72);
+		//REQUIRE(testPolygon.getNumSides() == 5);
 	}
 }
 
