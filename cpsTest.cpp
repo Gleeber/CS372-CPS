@@ -26,7 +26,10 @@ TEST_CASE("Test for Shape class:") {
 		Shape testShape;
 		REQUIRE(testShape.getWidth() == 72);
 	}
-
+	SECTION("Test getCenter():") {
+		Shape testShape;
+		REQUIRE(testShape.getCenter() == make_pair(306.0, 396.0));
+	}
 }
 
 TEST_CASE("Test for Circle class:")
