@@ -70,6 +70,14 @@ TEST_CASE("Test for Circle class:")
 		REQUIRE(testCircle.getWidth() == 72);
 		REQUIRE(testCircle.getRadius() == 36);
 	}
+
+	SECTION("Test constructor that takes radius:")
+	{
+		Circle testCircle(100);
+		REQUIRE(testCircle.getHeight() == 200);
+		REQUIRE(testCircle.getWidth() == 200);
+		REQUIRE(testCircle.getRadius() == 100);
+	}
 }
 
 TEST_CASE("Test for Rectangle class:")
