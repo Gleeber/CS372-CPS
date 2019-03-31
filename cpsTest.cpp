@@ -100,6 +100,7 @@ TEST_CASE("Test for Polygon class:")
 		REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
 		REQUIRE(testPolygon.getHeight() == 72);
 		REQUIRE(testPolygon.getWidth() == 72);
+		REQUIRE(testPolygon.getNumSides() == 5);
 	}
 }
 
