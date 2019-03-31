@@ -40,6 +40,16 @@ void Shape::setWidth(double num)
     _width = num;
 }
 
+void Shape::openfile(const char *filename)
+{
+    file.open(filename);
+}
+
+void Shape::closefile()
+{
+    file.close();
+}
+
 
 // ****************************** Circle Class ******************************
 

@@ -6,6 +6,7 @@
 #define CS372_CPS_SHAPE_H
 
 #include <iostream>
+#include <fstream>
 #include <utility>
 using std::pair;
 
@@ -20,6 +21,10 @@ public:
     void setHeight(double num);
     void setWidth(double num);
     void setCenter(double x, double y);
+    void openfile(const char filename[]);
+    void closefile();
+protected:
+    std::ofstream file;
 private:
     pair<double, double> _center;
     double _height;
