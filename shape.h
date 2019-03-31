@@ -43,6 +43,8 @@ public:
 
     double getRadius();
 
+    virtual string generatePostScript() override;
+
 private:
     double _radius;
 };

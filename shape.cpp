@@ -77,6 +77,15 @@ double Circle::getRadius()
     return _radius;
 }
 
+string Circle::generatePostScript()
+{
+    return "newpath\n" +
+            std::to_string(getCenter().first) + " " +
+            std::to_string(getCenter().second) + " " +
+            std::to_string(getRadius()) + " " +
+            "0 360 arc\n" "stroke";
+}
+
 // ****************************** Rectangle Class ******************************
 
 Rectangle::Rectangle()
