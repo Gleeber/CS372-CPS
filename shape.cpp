@@ -56,8 +56,6 @@ double Circle::getRadius()
 
 Rectangle::Rectangle()
 {
-    setCenter(306, 306);
-    setHeight(72);
-    setWidth(72);
+    setWidth(getWidth() * 2);
 }
 
