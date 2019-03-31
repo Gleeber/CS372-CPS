@@ -9,7 +9,7 @@ using std::ofstream;
 // ****************************** Shape Class ******************************
 
 Shape::Shape():
-    _center(306, 396), _height(72), _width(72), _filename("posScriptFile.ps")
+    _center(306, 396), _height(72), _width(72), _filename("../CS372-CPS/postScriptFile.ps")
 {}
 
 pair<double, double> Shape::getCenter()
