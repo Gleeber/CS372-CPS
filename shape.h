@@ -74,6 +74,7 @@ public:
     Rectangle();
     Rectangle(double width, double height);
 
+    virtual string generatePostScript() override;
 
 private:
 
