@@ -35,6 +35,11 @@ TEST_CASE("Test for Shape class:") {
 		testShape.setHeight(144);
 		REQUIRE(testShape.getHeight() == 144);
 	}
+	SECTION("Test setWidth():") {
+		Shape testShape;
+		testShape.setWidth(144);
+		REQUIRE(testShape.getWidth() == 144);
+	}
 }
 
 TEST_CASE("Test for Circle class:")
