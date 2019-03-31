@@ -111,6 +111,17 @@ Rectangle::Rectangle(double width, double height)
     setHeight(height);
 }
 
+string Rectangle::generatePostScript()
+{
+    return "newpath\n -" + std::to_string(getWidth())
+            + " -" +std::to_string(getHeight()) + " moveto\n"
+            + std::to_string(getHeight()) + " -" + std::to_string(getWidth())
+            + " moveto\n" + std::to_string(getHeight()) + " "
+            + std::to_string(getWidth()) + " moveto\n -"
+            + std::to_string(getHeight()) + " " + std::to_string(getWidth())
+            + " closepath";
+}
+
 // *********************************************************************
 // Polygon class definitions
 // *********************************************************************
