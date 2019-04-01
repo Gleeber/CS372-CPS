@@ -9,11 +9,13 @@ int main()
 {
     Triangle shape1(100);
     Square shape2(100);
+    Rectangle rectangle(40,70);
     Polygon shape3(5,100);
     Spacer spacer(20,45);
     Square shape4(100);
     Circle circle(45);
-    Vertical combinedShape(shape1, shape2, shape4,circle, shape3);
-    Horizontal combinedShape2(combinedShape, shape4);
-    combinedShape2.draw();
+    Layered combinedShape(shape1, shape2, rectangle, shape3);
+    Vertical combinedShape2(combinedShape, spacer, rectangle, shape4, shape4);
+    Horizontal combinedShape3(combinedShape,combinedShape2);
+    combinedShape3.draw();
 }

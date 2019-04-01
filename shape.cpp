@@ -178,7 +178,8 @@ string Polygon::generatePostScript() const
            + to_string(_sideLength) + " 0 rlineto\n"
            + to_string(360 / _numberOfSides) + " rotate\n"
            + "} for\n"
-           + "clear\n";
+           + "clear\n"
+           + to_string((_sideLength - getWidth()) / 2) + " 0 rmoveto\n";
 }
 
 // *********************************************************************

@@ -31,15 +31,27 @@ void Layered::updateWidthAndHeight()
 string Layered::generatePostScript() const
 {
     string postscriptOutput = "";
+
     for (auto eachShapeReference : _shapeReferences)
     {
-        postscriptOutput += "newpath\n"
-                            + to_string(getCenter().first) + " "
-                            + to_string(getCenter().second) + " "
-                            + "moveto\n";
         const Shape & eachShape = eachShapeReference.get();
-        postscriptOutput += eachShape.generatePostScript() += "stroke\n\n";
+
+        /*
+        postscriptOutput += to_string(getCenter().first) + " "
+                            + to_string(getCenter().second) + " "
+                            + "rmoveto\n";
+                            */
+
+        postscriptOutput += eachShape.generatePostScript() += "\n";
+
+        postscriptOutput += to_string(eachShape.getWidth() / 2) + " "
+                            + to_string(eachShape.getHeight() / 2) + " "
+                            + "rmoveto\n";
     }
+
+    postscriptOutput += to_string(- getWidth() / 2) + " "
+                        + to_string(- getHeight() / 2) + " "
+                        + "rmoveto\n";
     return postscriptOutput;
 }
 
@@ -83,10 +95,10 @@ string Vertical::generatePostScript() const
                             + "\n";
     }
 
-    postscriptOutput += "stroke\n"
-                        + to_string(getCenter().first) + " "
-                        + to_string(getCenter().second) + " "
-                        + "moveto\n";
+    postscriptOutput += "0 "
+                        + to_string(- getHeight()) + " "
+                        + "rmoveto\n";
+
     return postscriptOutput;
 }
 
@@ -130,6 +142,8 @@ string Horizontal::generatePostScript() const
                             + "\n";
     }
 
-    postscriptOutput += "stroke\n";
+    postscriptOutput += to_string(- getWidth()) + " "
+                        + "0 "
+                        + "rmoveto\n";
     return postscriptOutput;
 }
