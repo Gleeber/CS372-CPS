@@ -126,6 +126,8 @@ private:
  public:
      Scaled(const Shape &shape, double fx, double fy);
 
+     virtual string generatePostScript() const override;
+
  private:
      double _scaleFactorX;
      double _scaleFactorY;

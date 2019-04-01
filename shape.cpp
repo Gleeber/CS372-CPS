@@ -220,3 +220,10 @@ Scaled::Scaled(const Shape &shape, double fx, double fy) :_shape(shape), _scaleF
     setWidth(getWidth()*fx);
     setHeight(getHeight()*fy);
 }
+
+string Scaled::generatePostScript() const
+{
+    return to_string(_scaleFactorX) + " "
+           + to_string(_scaleFactorY) + " scale\n"
+           + _shape.generatePostScript();
+}
