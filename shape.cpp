@@ -242,8 +242,8 @@ string Rotated::generatePostScript() const
 
 Scaled::Scaled(const Shape &shape, double fx, double fy) :_shape(shape), _scaleFactorX(fx), _scaleFactorY(fy)
 {
-    setWidth(getWidth()*fx);
-    setHeight(getHeight()*fy);
+    setWidth(_shape.getWidth()*fx);
+    setHeight(_shape.getHeight()*fy);
 }
 
 string Scaled::generatePostScript() const
