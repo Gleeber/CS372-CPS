@@ -208,7 +208,7 @@ Spacer::Spacer(double width, double height)
 }
 string Spacer::generatePostScript() const
 {
-    return "Spacer";
+    return "";
 }
 
 // *********************************************************************
