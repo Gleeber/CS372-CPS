@@ -149,6 +149,14 @@ private:
      const Shape & _shape;
  };
 
+// *********************************************************************
+// Layered class
+// *********************************************************************
 
+class Layered : public Shape
+{
+public:
+private:
+};
 
 #endif //CS372_CPS_SHAPE_H
