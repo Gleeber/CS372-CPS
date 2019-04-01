@@ -215,7 +215,7 @@ string Rotated::generatePostScript() const
 // Scaled class definitions
 // *********************************************************************
 
-Scaled::Scaled(const Shape &shape, double fx, double fy) :_shape(shape), _fx(fx), _fy(fy)
+Scaled::Scaled(const Shape &shape, double fx, double fy) :_shape(shape), _scaleFactorX(fx), _scaleFactorY(fy)
 {
     setWidth(getWidth()*fx);
     setHeight(getHeight()*fy);
