@@ -9,6 +9,39 @@
 
 
 // *********************************************************************
+// Rotated class
+// *********************************************************************
+
+class Rotated : public Shape
+{
+public:
+    Rotated(const Shape &shape, int rotationAngle);
+
+    virtual string generatePostScript() const override;
+
+private:
+    const Shape & _shape;
+    int _rotation;
+};
+
+// *********************************************************************
+// Scaled class
+// *********************************************************************
+
+class Scaled: public Shape
+{
+public:
+    Scaled(const Shape &shape, double fx, double fy);
+
+    virtual string generatePostScript() const override;
+
+private:
+    double _scaleFactorX;
+    double _scaleFactorY;
+    const Shape & _shape;
+};
+
+// *********************************************************************
 // Layered class
 // *********************************************************************
 
@@ -75,39 +108,6 @@ public:
 
 private:
     vector<reference_wrapper<const Shape>> _shapeReferences;
-};
-
-// *********************************************************************
-// Rotated class
-// *********************************************************************
-
-class Rotated : public Shape
-{
-public:
-    Rotated(const Shape &shape, int rotationAngle);
-
-    virtual string generatePostScript() const override;
-
-private:
-    const Shape & _shape;
-    int _rotation;
-};
-
-// *********************************************************************
-// Scaled class
-// *********************************************************************
-
-class Scaled: public Shape
-{
-public:
-    Scaled(const Shape &shape, double fx, double fy);
-
-    virtual string generatePostScript() const override;
-
-private:
-    double _scaleFactorX;
-    double _scaleFactorY;
-    const Shape & _shape;
 };
 
 #endif //CPS_COMPOUNDSHAPE_H
