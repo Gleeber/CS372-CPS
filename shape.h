@@ -16,6 +16,12 @@ using std::to_string;
 using std::vector;
 #include <functional>
 using std::reference_wrapper;
+#include <cstdarg>
+
+
+#include <type_traits>
+using std::is_base_of;
+using std::enable_if;
 
 // *********************************************************************
 // Shape class
@@ -179,7 +185,41 @@ private:
 class Layered : public Shape
 {
 public:
-    Layered(vector<reference_wrapper<const Shape>>);
+    template <typename Arg, typename... Ts,
+              typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
+    Layered(Arg &i, Ts &... all)
+    {
+        _shapeReferences = {i, all... };
+        updateWidthAndHeight();
+    }
+
+    void updateWidthAndHeight();
+
+    virtual string generatePostScript() const override;
+
+private:
+    vector<reference_wrapper<const Shape>> _shapeReferences;
+};
+
+// *********************************************************************
+// Vertical class
+// *********************************************************************
+
+class Vertical : public Shape
+{
+public:
+    template <typename Arg, typename... Ts,
+            typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
+    Vertical(Arg &i, Ts &... all)
+    {
+        _shapeReferences = {i, all... };
+        updateWidthAndHeight();
+    }
+
+    void updateWidthAndHeight();
+
+    virtual string generatePostScript() const override;
+
 private:
     vector<reference_wrapper<const Shape>> _shapeReferences;
 };

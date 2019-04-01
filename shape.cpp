@@ -106,8 +106,7 @@ double Circle::getRadius() const
 
 string Circle::generatePostScript() const
 {
-    return "newpath\n" +
-            std::to_string(getCenter().first) + " " +
+    return  std::to_string(getCenter().first) + " " +
             std::to_string(getCenter().second) + " " +
             std::to_string(getRadius()) + " " +
             "0 360 arc\n";
@@ -191,7 +190,7 @@ string Polygon::generatePostScript() const
     return + "-" + std::to_string(getWidth() / 2)
            + " -" + std::to_string(getHeight() / 2) + " rmoveto\n"
 
-           + to_string(sin(360 / _numberOfSides) * _sideLength) + " 0 rmoveto\n"
+           + to_string((getWidth() - _sideLength) / 2) + " 0 rmoveto\n"
 
            + "1 1 " + to_string(_numberOfSides) + " {\n"
            + to_string(_sideLength) + " 0 rlineto\n"
@@ -271,7 +270,75 @@ string Scaled::generatePostScript() const
 // Layered class definitions
 // *********************************************************************
 
-Layered::Layered(vector<reference_wrapper<const Shape>> shapeReferences):
-    _shapeReferences(std::move(shapeReferences))
-{}
+void Layered::updateWidthAndHeight()
+{
+    double maxWidth = 0, maxHeight = 0;
+    for (auto eachShapeReference : _shapeReferences)
+    {
+        const Shape & eachShape = eachShapeReference.get();
+        maxWidth = max(maxWidth, eachShape.getWidth());
+        maxHeight = max(maxHeight, eachShape.getHeight());
+    }
 
+    setWidth(maxWidth);
+    setHeight(maxHeight);
+}
+
+string Layered::generatePostScript() const 
+{
+    string postscriptOutput = "";
+    for (auto eachShapeReference : _shapeReferences)
+    {
+        postscriptOutput += "newpath\n"
+                         + to_string(getCenter().first) + " "
+                         + to_string(getCenter().second) + " "
+                         + "moveto\n";
+        const Shape & eachShape = eachShapeReference.get();
+        postscriptOutput += eachShape.generatePostScript() += "stroke\n\n";
+    }
+    return postscriptOutput;
+}
+
+// *********************************************************************
+// Vertical class definitions
+// *********************************************************************
+
+void Vertical::updateWidthAndHeight()
+{
+    double width = 0, height = 0;
+    for (auto eachShapeReference : _shapeReferences)
+    {
+        const Shape & eachShape = eachShapeReference.get();
+        width = max(width, eachShape.getWidth());
+        height += eachShape.getHeight();
+    }
+
+    setWidth(width);
+    setHeight(height);
+}
+
+string Vertical::generatePostScript() const
+{
+    string postscriptOutput = "";
+    postscriptOutput += to_string(getCenter().first - getWidth() / 2) + " "
+                      + to_string(getCenter().second - getHeight() / 2) + " "
+                      + "moveto\n";
+
+    for (auto eachShapeReference : _shapeReferences)
+    {
+        const Shape & eachShape = eachShapeReference.get();
+        postscriptOutput += to_string(getWidth() / 2) + " "
+                          + to_string(eachShape.getHeight() / 2) + " "
+                          + "rmoveto\n";
+
+        postscriptOutput += eachShape.generatePostScript();
+
+        postscriptOutput += to_string((eachShape.getWidth() - getWidth()) / 2) + " "
+                          + to_string(eachShape.getHeight()) + " "
+                          + "rmoveto\n"
+                          + "\n";
+    }
+
+    postscriptOutput += "stroke\n";
+    return postscriptOutput;
+}
