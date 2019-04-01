@@ -145,20 +145,10 @@ TEST_CASE("Test for Triangle:") {
 TEST_CASE("Test for Square:") {
 	SECTION("Test default constructor")
 	{
-		//Square testSquare;
-		//REQUIRE(testSquare.getCenter() == make_pair(306, 396));
-		//REQUIRE(testSquare.getHeight() == 72);
-		//REQUIRE(testSquare.getWidth() == 72);
-	}
-}
-
-TEST_CASE("Test for Pentagon:") {
-	SECTION("Test default constructor:")
-	{
-		//Polygon testDefaultPolygon;
-		//REQUIRE(testDefaultPolygon.getCenter() == make_pair(306, 396));
-		//REQUIRE(testDefaultPolygon.getHeight() == 72);
-		//REQUIRE(testDefaultPolygon.getWidth() == 72);
+		Square testSquare(61);
+		REQUIRE(testSquare.getCenter() == make_pair(306.0, 396.0));
+		REQUIRE(testSquare.getHeight() == Approx(61.0));
+		REQUIRE(testSquare.getWidth() == Approx(61.0));
 	}
 }
 
@@ -172,7 +162,8 @@ TEST_CASE("Test for Spacer:")
 		REQUIRE(testSpacer.getCenter() == make_pair(306.0,396.0));
 	}
 }
-TEST_CASE("Compound Shapes:")
+
+TEST_CASE("Tests for Rotated shapes:")
 {
 	Circle circle(5.0);
 	Rectangle rect(15.0 ,10.0);
