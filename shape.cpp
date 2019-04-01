@@ -219,13 +219,13 @@ Rotated::Rotated(const Shape &shape, int rotationAngle): _shape(shape), _rotatio
 {
     if(rotationAngle == 0 || rotationAngle == 180)
     {
-        setWidth(getWidth());
-        setHeight(getHeight());
+        setWidth(_shape.getWidth());
+        setHeight(_shape.getHeight());
     }
     else //Rotation angle is 90 or 270
     {
-        setWidth(getHeight());
-        setHeight(getWidth());
+        setWidth(_shape.getHeight());
+        setHeight(_shape.getWidth());
     }
 
 }
