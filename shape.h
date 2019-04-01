@@ -11,6 +11,7 @@
 using std::pair;
 #include <string>
 using std::string;
+using std::to_string;
 
 // *********************************************************************
 // Shape class
@@ -73,8 +74,8 @@ class Rectangle : public Shape
 public:
     Rectangle();
     Rectangle(double width, double height);
-    virtual string generatePostScript() override;
 
+    virtual string generatePostScript() override;
 
 private:
 
@@ -90,6 +91,8 @@ public:
     Polygon();
 
     int getNumSides();
+
+    virtual string generatePostScript() override;
 
 private:
     int _numberOfSides;

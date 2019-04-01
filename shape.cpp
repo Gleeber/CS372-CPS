@@ -150,11 +150,11 @@ Polygon::Polygon():
         setHeight(_sideLength * cos(M_PI / _numberOfSides) / sin(M_PI / _numberOfSides));
         setWidth(_sideLength * cos(M_PI / _numberOfSides) / sin(M_PI / _numberOfSides));
     }
+
     else  //case 3: n is divisible by 2, but not 4.
     {
         setHeight(_sideLength*(cos(M_PI/ _numberOfSides)) / (sin(M_PI/_numberOfSides)));
         setWidth(_sideLength/(sin(M_PI/_numberOfSides)));
-
     }
     
 
@@ -163,6 +163,25 @@ Polygon::Polygon():
 int Polygon::getNumSides()
 {
     return _numberOfSides;
+}
+
+string Polygon::generatePostScript()
+{
+    return "newpath\n"
+           + std::to_string(getCenter().first) + " "
+           + std::to_string(getCenter().second) + " moveto\n"
+
+           + "-" + std::to_string(getWidth() / 2)
+           + " -" + std::to_string(getHeight() / 2) + " rmoveto\n"
+
+           + to_string(sin(360 / _numberOfSides) * _sideLength) + " 0 rmoveto\n"
+
+           + "1 1 " + to_string(_numberOfSides) + " {\n"
+           + to_string(_sideLength) + " 0 rlineto\n"
+           + to_string(360 / _numberOfSides) + " rotate\n"
+           + "} for\n"
+
+           + "stroke";
 }
 
 // *********************************************************************
