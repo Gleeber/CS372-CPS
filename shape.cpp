@@ -68,7 +68,12 @@ void Shape::draw()
 {
     ofstream postScriptOutput;
     postScriptOutput.open (_filename);
+    postScriptOutput << "newpath\n"
+                        + to_string(getCenter().first) + " "
+                        + to_string(getCenter().second) + " "
+                        + "moveto\n";
     postScriptOutput << generatePostScript();
+    postScriptOutput << "stroke\n\nshowpage";
     postScriptOutput.close();
 }
 
@@ -103,7 +108,7 @@ string Circle::generatePostScript() const
             std::to_string(getCenter().first) + " " +
             std::to_string(getCenter().second) + " " +
             std::to_string(getRadius()) + " " +
-            "0 360 arc\n" "stroke";
+            "0 360 arc\n";
 }
 
 // *********************************************************************
@@ -123,18 +128,13 @@ Rectangle::Rectangle(double width, double height)
 
 string Rectangle::generatePostScript() const
 {
-    return "newpath\n"
-            + std::to_string(getCenter().first) + " "
-            + std::to_string(getCenter().second) + " moveto\n"
-
-            + "-" + std::to_string(getWidth()/2)
+    return  "-" + std::to_string(getWidth()/2)
             + " -" + std::to_string(getHeight()/2) + " rmoveto\n"
 
             + std::to_string(getWidth()) + " 0 rlineto\n"
             + "0 " + std::to_string(getHeight()) + " rlineto\n"
             + "-" + std::to_string(getWidth()) + " 0 rlineto\n"
-            + "0 -" + std::to_string(getHeight()) + " rlineto\n"
-            + "stroke";
+            + "0 -" + std::to_string(getHeight()) + " rlineto\n";
 }
 
 // *********************************************************************
@@ -175,11 +175,7 @@ double Polygon::getSideLength() const
 
 string Polygon::generatePostScript() const
 {
-    return "newpath\n"
-           + std::to_string(getCenter().first) + " "
-           + std::to_string(getCenter().second) + " moveto\n"
-
-           + "-" + std::to_string(getWidth() / 2)
+    return + "-" + std::to_string(getWidth() / 2)
            + " -" + std::to_string(getHeight() / 2) + " rmoveto\n"
 
            + to_string(sin(360 / _numberOfSides) * _sideLength) + " 0 rmoveto\n"
@@ -187,9 +183,7 @@ string Polygon::generatePostScript() const
            + "1 1 " + to_string(_numberOfSides) + " {\n"
            + to_string(_sideLength) + " 0 rlineto\n"
            + to_string(360 / _numberOfSides) + " rotate\n"
-           + "} for\n"
-
-           + "stroke";
+           + "} for\n";
 }
 
 // *********************************************************************
@@ -213,5 +207,6 @@ Rotated::Rotated(const Shape &shape, int rotationAngle): _shape(shape), _rotatio
 
 string Rotated::generatePostScript() const
 {
-    return _shape.generatePostScript();
+    return to_string(_rotation) + " rotate\n"
+           + _shape.generatePostScript();
 }
