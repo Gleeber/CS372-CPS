@@ -38,14 +38,9 @@ public:
 
     void setHeight(double num);
     void setWidth(double num);
-    void setCenter(double x, double y);
-
-    void openfile(const char filename[]);
-    void closefile();
 
     virtual string generatePostScript() const;
     void draw();
-    string getFilename() const;
 
 protected:
     std::ofstream file;
@@ -177,74 +172,5 @@ private:
      double _scaleFactorY;
      const Shape & _shape;
  };
-
-// *********************************************************************
-// Layered class
-// *********************************************************************
-
-class Layered : public Shape
-{
-public:
-    template <typename Arg, typename... Ts,
-              typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
-    Layered(Arg &i, Ts &... all)
-    {
-        _shapeReferences = {i, all... };
-        updateWidthAndHeight();
-    }
-
-    void updateWidthAndHeight();
-
-    virtual string generatePostScript() const override;
-
-private:
-    vector<reference_wrapper<const Shape>> _shapeReferences;
-};
-
-// *********************************************************************
-// Vertical class
-// *********************************************************************
-
-class Vertical : public Shape
-{
-public:
-    template <typename Arg, typename... Ts,
-            typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
-    Vertical(Arg &i, Ts &... all)
-    {
-        _shapeReferences = {i, all... };
-        updateWidthAndHeight();
-    }
-
-    void updateWidthAndHeight();
-
-    virtual string generatePostScript() const override;
-
-private:
-    vector<reference_wrapper<const Shape>> _shapeReferences;
-};
-
-// *********************************************************************
-// Horizontal class
-// *********************************************************************
-
-class Horizontal : public Shape
-{
-public:
-    template <typename Arg, typename... Ts,
-            typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
-    Horizontal(Arg &i, Ts &... all)
-    {
-        _shapeReferences = {i, all... };
-        updateWidthAndHeight();
-    }
-
-    void updateWidthAndHeight();
-
-    virtual string generatePostScript() const override;
-
-private:
-    vector<reference_wrapper<const Shape>> _shapeReferences;
-};
 
 #endif //CS372_CPS_SHAPE_H

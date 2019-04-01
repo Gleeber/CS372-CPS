@@ -9,6 +9,7 @@
 #define CATCH_CONFIG_FAST_COMPILE
 #include "catch.hpp"
 #include "shape.h"
+#include "CompoundShape.h
 #include <utility>
 using std::make_pair;
 #include <cmath>

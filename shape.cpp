@@ -36,11 +36,6 @@ double Shape::getWidth() const
     return _width;
 }
 
-void Shape::setCenter(double x, double y)
-{
-    _center=std::make_pair(x, y);
-}
-
 void Shape::setHeight(double num)
 {
     _height = num;
@@ -51,19 +46,9 @@ void Shape::setWidth(double num)
     _width = num;
 }
 
-void Shape::openfile(const char *filename)
-{
-    file.open(filename);
-}
-
-void Shape::closefile()
-{
-    file.close();
-}
-
 string Shape::generatePostScript() const
 {
-    return "Nothing to generate";
+    return "Nothing to generate\n";
 }
 
 void Shape::draw()
@@ -73,15 +58,10 @@ void Shape::draw()
     postScriptOutput << "newpath\n"
                         + to_string(getCenter().first) + " "
                         + to_string(getCenter().second) + " "
-                        + "moveto\n";
+                        + "moveto\n\n";
     postScriptOutput << generatePostScript();
     postScriptOutput << "stroke\n\nshowpage";
     postScriptOutput.close();
-}
-
-string Shape::getFilename() const
-{
-    return _filename;
 }
 
 // *********************************************************************
@@ -106,8 +86,7 @@ double Circle::getRadius() const
 
 string Circle::generatePostScript() const
 {
-    return  std::to_string(getCenter().first) + " " +
-            std::to_string(getCenter().second) + " " +
+    return  "currentpoint\n" +
             std::to_string(getRadius()) + " " +
             "0 360 arc\n";
 }
@@ -187,7 +166,7 @@ double Polygon::getSideLength() const
 
 string Polygon::generatePostScript() const
 {
-    return + "-" + std::to_string(getWidth() / 2)
+    return   "-" + std::to_string(getWidth() / 2)
            + " -" + std::to_string(getHeight() / 2) + " rmoveto\n"
 
            + to_string((getWidth() - _sideLength) / 2) + " 0 rmoveto\n"
@@ -195,20 +174,25 @@ string Polygon::generatePostScript() const
            + "1 1 " + to_string(_numberOfSides) + " {\n"
            + to_string(_sideLength) + " 0 rlineto\n"
            + to_string(360 / _numberOfSides) + " rotate\n"
-           + "} for\n";
+           + "} for\n"
+           + "clear\n";
 }
 
 // *********************************************************************
 // Triangle class definitions
 // *********************************************************************
 
-Triangle::Triangle(double sideLength):Polygon(3, sideLength) {}
+Triangle::Triangle(double sideLength)
+    :Polygon(3, sideLength)
+{}
 
 // *********************************************************************
 // Square class definitions
 // *********************************************************************
 
-Square::Square(double sidelength): Polygon(4, sidelength){}
+Square::Square(double sideLength)
+    : Polygon(4, sideLength)
+{}
 
 // *********************************************************************
 // Spacer class definitions
@@ -219,9 +203,12 @@ Spacer::Spacer(double width, double height)
     setWidth(width);
     setHeight(height);
 }
+
 string Spacer::generatePostScript() const
 {
-    return "";
+    return to_string(- getWidth() / 2) + " "
+         + to_string(- getHeight() / 2) + " "
+         + "rmoveto\n";
 }
 
 // *********************************************************************
@@ -266,123 +253,4 @@ string Scaled::generatePostScript() const
            + _shape.generatePostScript();
 }
 
-// *********************************************************************
-// Layered class definitions
-// *********************************************************************
 
-void Layered::updateWidthAndHeight()
-{
-    double maxWidth = 0, maxHeight = 0;
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-        maxWidth = max(maxWidth, eachShape.getWidth());
-        maxHeight = max(maxHeight, eachShape.getHeight());
-    }
-
-    setWidth(maxWidth);
-    setHeight(maxHeight);
-}
-
-string Layered::generatePostScript() const 
-{
-    string postscriptOutput = "";
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        postscriptOutput += "newpath\n"
-                         + to_string(getCenter().first) + " "
-                         + to_string(getCenter().second) + " "
-                         + "moveto\n";
-        const Shape & eachShape = eachShapeReference.get();
-        postscriptOutput += eachShape.generatePostScript() += "stroke\n\n";
-    }
-    return postscriptOutput;
-}
-
-// *********************************************************************
-// Vertical class definitions
-// *********************************************************************
-
-void Vertical::updateWidthAndHeight()
-{
-    double width = 0, height = 0;
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-        width = max(width, eachShape.getWidth());
-        height += eachShape.getHeight();
-    }
-
-    setWidth(width);
-    setHeight(height);
-}
-
-string Vertical::generatePostScript() const
-{
-    string postscriptOutput = "";
-    postscriptOutput += to_string(getCenter().first - getWidth() / 2) + " "
-                      + to_string(getCenter().second - getHeight() / 2) + " "
-                      + "moveto\n";
-
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-        postscriptOutput += to_string(getWidth() / 2) + " "
-                          + to_string(eachShape.getHeight() / 2) + " "
-                          + "rmoveto\n";
-
-        postscriptOutput += eachShape.generatePostScript();
-
-        postscriptOutput += to_string((eachShape.getWidth() - getWidth()) / 2) + " "
-                          + to_string(eachShape.getHeight()) + " "
-                          + "rmoveto\n"
-                          + "\n";
-    }
-
-    postscriptOutput += "stroke\n";
-    return postscriptOutput;
-}
-
-// *********************************************************************
-// Horizontal class definitions
-// *********************************************************************
-
-void Horizontal::updateWidthAndHeight()
-{
-    double width = 0, height = 0;
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-        height = max(height, eachShape.getHeight());
-        width += eachShape.getWidth();
-    }
-
-    setWidth(width);
-    setHeight(height);
-}
-
-string Horizontal::generatePostScript() const
-{
-    string postscriptOutput = "";
-    postscriptOutput += to_string(getCenter().first - getWidth() / 2) + " "
-                        + to_string(getCenter().second - getHeight() / 2) + " "
-                        + "moveto\n";
-
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-        postscriptOutput += to_string(eachShape.getWidth() / 2) + " "
-                            + to_string(getHeight() / 2) + " "
-                            + "rmoveto\n";
-
-        postscriptOutput += eachShape.generatePostScript();
-
-        postscriptOutput += to_string(eachShape.getWidth()) + " "
-                            + to_string((eachShape.getHeight() - getHeight()) / 2) + " "
-                            + "rmoveto\n"
-                            + "\n";
-    }
-
-    postscriptOutput += "stroke\n";
-    return postscriptOutput;
-}
