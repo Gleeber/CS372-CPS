@@ -349,7 +349,16 @@ string Vertical::generatePostScript() const
 
 void Horizontal::updateWidthAndHeight()
 {
+    double width = 0, height = 0;
+    for (auto eachShapeReference : _shapeReferences)
+    {
+        const Shape & eachShape = eachShapeReference.get();
+        height = max(height, eachShape.getHeight());
+        width += eachShape.getWidth();
+    }
 
+    setWidth(width);
+    setHeight(height);
 }
 
 string Horizontal::generatePostScript() const
