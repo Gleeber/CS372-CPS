@@ -123,13 +123,20 @@ Rectangle::Rectangle(double width, double height)
 
 string Rectangle::generatePostScript() const
 {
-    return  "-" + std::to_string(getWidth()/2)
-            + " -" + std::to_string(getHeight()/2) + " rmoveto\n"
+    return  std::to_string(-getWidth()/2) + " "
+            + std::to_string(-getHeight()/2) + " "
+            + "rmoveto\n"
 
             + std::to_string(getWidth()) + " 0 rlineto\n"
             + "0 " + std::to_string(getHeight()) + " rlineto\n"
             + "-" + std::to_string(getWidth()) + " 0 rlineto\n"
-            + "0 -" + std::to_string(getHeight()) + " rlineto\n";
+            + "0 -" + std::to_string(getHeight()) + " rlineto\n"
+
+            + std::to_string(getWidth()/2) + " "
+            + std::to_string(getHeight()/2) + " "
+            + "rmoveto\n";
+
+
 }
 
 // *********************************************************************
@@ -226,47 +233,3 @@ string Spacer::generatePostScript() const
          + to_string(- getHeight() / 2) + " "
          + "rmoveto\n";
 }
-
-// *********************************************************************
-// Rotated class definitions
-// *********************************************************************
-
-Rotated::Rotated(const Shape &shape, int rotationAngle): _shape(shape), _rotation(rotationAngle)
-{
-    if(rotationAngle == 0 || rotationAngle == 180)
-    {
-        setWidth(_shape.getWidth());
-        setHeight(_shape.getHeight());
-    }
-    else //Rotation angle is 90 or 270
-    {
-        setWidth(_shape.getHeight());
-        setHeight(_shape.getWidth());
-    }
-
-}
-
-string Rotated::generatePostScript() const
-{
-    return to_string(_rotation) + " rotate\n"
-           + _shape.generatePostScript();
-}
-
-// *********************************************************************
-// Scaled class definitions
-// *********************************************************************
-
-Scaled::Scaled(const Shape &shape, double fx, double fy) :_shape(shape), _scaleFactorX(fx), _scaleFactorY(fy)
-{
-    setWidth(_shape.getWidth()*fx);
-    setHeight(_shape.getHeight()*fy);
-}
-
-string Scaled::generatePostScript() const
-{
-    return to_string(_scaleFactorX) + " "
-           + to_string(_scaleFactorY) + " scale\n"
-           + _shape.generatePostScript();
-}
-
-
