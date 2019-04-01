@@ -10,6 +10,8 @@ using std::ofstream;
 #include <cmath>
 using std::sin;
 using std::cos;
+#include <algorithm>
+using std::max;
 
 // *********************************************************************
 // Shape class definitions
@@ -252,3 +254,12 @@ string Scaled::generatePostScript() const
            + to_string(_scaleFactorY) + " scale\n"
            + _shape.generatePostScript();
 }
+
+// *********************************************************************
+// Layered class definitions
+// *********************************************************************
+
+Layered::Layered(vector<reference_wrapper<const Shape>> shapeReferences):
+    _shapeReferences(std::move(shapeReferences))
+{}
+

@@ -12,6 +12,10 @@ using std::pair;
 #include <string>
 using std::string;
 using std::to_string;
+#include <vector>
+using std::vector;
+#include <functional>
+using std::reference_wrapper;
 
 // *********************************************************************
 // Shape class
@@ -156,7 +160,9 @@ private:
 class Layered : public Shape
 {
 public:
+    Layered(vector<reference_wrapper<const Shape>>);
 private:
+    vector<reference_wrapper<const Shape>> _shapeReferences;
 };
 
 #endif //CS372_CPS_SHAPE_H
