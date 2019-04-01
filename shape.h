@@ -38,6 +38,7 @@ public:
 
     void setHeight(double num);
     void setWidth(double num);
+    void setCenter(double x, double y);
 
     virtual string generatePostScript() const;
     void draw();

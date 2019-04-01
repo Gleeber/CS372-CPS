@@ -21,48 +21,60 @@ Shape::Shape():
     _center(306, 396), _height(72), _width(72), _filename("postScriptFile.ps")
 {}
 
-pair<double, double> Shape::getCenter() const
-{
-    return _center;
-}
+// Getters for Shape
 
-double Shape::getHeight() const
-{
-    return _height;
-}
+    pair<double, double> Shape::getCenter() const
+    {
+        return _center;
+    }
 
-double Shape::getWidth() const
-{
-    return _width;
-}
+    double Shape::getHeight() const
+    {
+        return _height;
+    }
 
-void Shape::setHeight(double num)
-{
-    _height = num;
-}
+    double Shape::getWidth() const
+    {
+        return _width;
+    }
 
-void Shape::setWidth(double num)
-{
-    _width = num;
-}
+// Setters for Shape
 
-string Shape::generatePostScript() const
-{
-    return "Nothing to generate\n";
-}
+    void Shape::setHeight(double num)
+    {
+        _height = num;
+    }
 
-void Shape::draw()
-{
-    ofstream postScriptOutput;
-    postScriptOutput.open (_filename);
-    postScriptOutput << "newpath\n"
-                        + to_string(getCenter().first) + " "
-                        + to_string(getCenter().second) + " "
-                        + "moveto\n\n";
-    postScriptOutput << generatePostScript();
-    postScriptOutput << "stroke\n\nshowpage";
-    postScriptOutput.close();
-}
+    void Shape::setWidth(double num)
+    {
+        _width = num;
+    }
+
+    void Shape::setCenter(double x, double y)
+    {
+        _center=std::make_pair(x, y);
+    }
+
+
+// Other base Shape functions
+
+    string Shape::generatePostScript() const
+    {
+        return "Nothing to generate\n";
+    }
+
+    void Shape::draw()
+    {
+        ofstream postScriptOutput;
+        postScriptOutput.open (_filename);
+        postScriptOutput << "newpath\n"
+                            + to_string(getCenter().first) + " "
+                            + to_string(getCenter().second) + " "
+                            + "moveto\n\n";
+        postScriptOutput << generatePostScript();
+        postScriptOutput << "stroke\n\nshowpage";
+        postScriptOutput.close();
+    }
 
 // *********************************************************************
 // Circle class definitions

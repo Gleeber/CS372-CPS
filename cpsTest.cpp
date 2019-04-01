@@ -9,7 +9,7 @@
 #define CATCH_CONFIG_FAST_COMPILE
 #include "catch.hpp"
 #include "shape.h"
-#include "CompoundShape.h
+#include "CompoundShape.h"
 #include <utility>
 using std::make_pair;
 #include <cmath>
@@ -108,28 +108,37 @@ TEST_CASE("Test for Polygon class:")
 	{
 		Polygon testPolygon;
 		REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
-		REQUIRE(testPolygon.getHeight() == 25 * sqrt(5 + 2 * sqrt(5)));
-		REQUIRE(testPolygon.getWidth() == 25 * (1 + sqrt(5)));
+		REQUIRE(testPolygon.getHeight() == Approx(25 * sqrt(5 + 2 * sqrt(5))));
+		REQUIRE(testPolygon.getWidth() == Approx(25 * (1 + sqrt(5))));
 		REQUIRE(testPolygon.getNumSides() == 5);
 	}
 
-	SECTION("Test Polygon constructor with number of sides:")
+	SECTION("Test Polygon constructor with even number of sides:")
 	{
-		//Polygon testPolygon(6);
-		//REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
-		//REQUIRE(testPolygon.getHeight() == 72);
-		//REQUIRE(testPolygon.getWidth() == 72);
-		//REQUIRE(testPolygon.getNumSides() == 5);
+		Polygon testPolygon(6, 82);
+		REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
+		REQUIRE(testPolygon.getHeight() == Approx (82 * sqrt(3)));
+		REQUIRE(testPolygon.getWidth() == Approx(164.0));
+		REQUIRE(testPolygon.getNumSides() == 6);
+	}
+
+	SECTION("Test Polygon constructor with divisible by 4 sides:")
+	{
+		Polygon testPolygon(8, 39);
+		REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
+		REQUIRE(testPolygon.getHeight() == Approx(94.1545232316));
+		REQUIRE(testPolygon.getWidth() == Approx(94.1545232316));
+		REQUIRE(testPolygon.getNumSides() == 8);
 	}
 }
 
 TEST_CASE("Test for Triangle:") {
-	SECTION("Test default constructor:")
+	SECTION("Test side length 64:")
 	{
-		//Triangle testTriangle;
-		//REQUIRE(testTriangle.getCenter() == make_pair(306, 396));
-		//REQUIRE(testTriangle.getHeight() == 72);
-		//REQUIRE(testTriangle.getWidth() == 72);
+		Triangle testTriangle(64);
+		REQUIRE(testTriangle.getCenter() == make_pair(306.0, 396.0));
+		REQUIRE(testTriangle.getHeight() == Approx(32 * sqrt(3)));
+		REQUIRE(testTriangle.getWidth() == 64);
 	}
 }
 
