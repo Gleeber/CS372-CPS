@@ -90,6 +90,9 @@ class Polygon : public Shape
 {
 public:
     Polygon();
+    Polygon(int numberOfSides, double sideLength);
+
+    void updateHeightAndWidth();
 
     int getNumSides() const;
     double getSideLength() const;

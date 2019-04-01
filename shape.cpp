@@ -144,6 +144,17 @@ string Rectangle::generatePostScript() const
 Polygon::Polygon():
     _numberOfSides(5), _sideLength(50)
 {
+    updateHeightAndWidth();
+}
+
+Polygon::Polygon(int numberOfSides, double sideLength):
+    _numberOfSides(numberOfSides), _sideLength(sideLength)
+{
+    updateHeightAndWidth();
+}
+
+void Polygon::updateHeightAndWidth()
+{
     if (_numberOfSides % 2 != 0) //Case 1: n is odd.
     {
         setHeight(_sideLength * (1 + cos(M_PI / _numberOfSides)) / (2 * sin(M_PI / _numberOfSides)));

@@ -6,7 +6,6 @@
 
 int main()
 {
-    Polygon shape;
-    Scaled rotatedShape(shape, 3,1.8);
-    rotatedShape.draw();
+    Polygon shape(6,80);
+    shape.draw();
 }
