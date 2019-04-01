@@ -21,10 +21,11 @@ class Shape
 {
 public:
     Shape();
+    Shape(const Shape &s);
 
-    pair<double, double> getCenter();
-    double getHeight();
-    double getWidth();
+    pair<double, double> getCenter() const;
+    double getHeight() const;
+    double getWidth() const;
 
     void setHeight(double num);
     void setWidth(double num);
@@ -35,6 +36,7 @@ public:
 
     virtual string generatePostScript();
     void draw();
+    string getFilename() const;
 
 protected:
     std::ofstream file;
@@ -55,9 +57,10 @@ class Circle : public Shape
 {
 public:
     Circle();
+    Circle(const Circle &c);
     Circle(double radius);
 
-    double getRadius();
+    double getRadius() const;
 
     virtual string generatePostScript() override;
 
@@ -89,8 +92,10 @@ class Polygon : public Shape
 {
 public:
     Polygon();
+    Polygon(const Polygon &p);
 
-    int getNumSides();
+    int getNumSides() const;
+    double getSideLength() const;
 
     virtual string generatePostScript() override;
 

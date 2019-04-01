@@ -19,17 +19,22 @@ Shape::Shape():
     _center(306, 396), _height(72), _width(72), _filename("postScriptFile.ps")
 {}
 
-pair<double, double> Shape::getCenter()
+Shape::Shape(const Shape &s):
+    _center(s.getCenter()), _filename(s.getFilename()),
+    _height(s.getHeight()), _width(s.getWidth())
+{}
+
+pair<double, double> Shape::getCenter() const
 {
     return _center;
 }
 
-double Shape::getHeight()
+double Shape::getHeight() const
 {
     return _height;
 }
 
-double Shape::getWidth()
+double Shape::getWidth() const
 {
     return _width;
 }
@@ -72,12 +77,21 @@ void Shape::draw()
     postScriptOutput.close();
 }
 
+string Shape::getFilename() const
+{
+    return _filename;
+}
+
 // *********************************************************************
 // Circle class definitions
 // *********************************************************************
 
 Circle::Circle():
     _radius(getHeight() / 2)
+{}
+
+Circle::Circle(const Circle &c):
+    Shape(c), _radius(c.getRadius())
 {}
 
 Circle::Circle(double radius):
@@ -87,7 +101,7 @@ Circle::Circle(double radius):
     setWidth( _radius * 2);
 }
 
-double Circle::getRadius()
+double Circle::getRadius() const
 {
     return _radius;
 }
@@ -156,13 +170,20 @@ Polygon::Polygon():
         setHeight(_sideLength*(cos(M_PI/ _numberOfSides)) / (sin(M_PI/_numberOfSides)));
         setWidth(_sideLength/(sin(M_PI/_numberOfSides)));
     }
-    
-
 }
 
-int Polygon::getNumSides()
+Polygon::Polygon(const Polygon &p):
+    Shape(p), _numberOfSides(p.getNumSides()), _sideLength(p.getSideLength())
+{}
+
+int Polygon::getNumSides() const
 {
     return _numberOfSides;
+}
+
+double Polygon::getSideLength() const
+{
+    return _sideLength;
 }
 
 string Polygon::generatePostScript()
@@ -188,9 +209,8 @@ string Polygon::generatePostScript()
 // Rotated class definitions
 // *********************************************************************
 
-Rotated::Rotated(const Shape &shape, int rotationAngle): _rotation(rotationAngle)
+Rotated::Rotated(const Shape &shape, int rotationAngle): Shape(shape), _rotation(rotationAngle)
 {
-    *this = shape;
     if(rotationAngle == 0 || rotationAngle == 180)
     {
         setWidth(getWidth());
