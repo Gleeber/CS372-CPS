@@ -154,25 +154,34 @@ TEST_CASE("Test for Pentagon:") {
 TEST_CASE("Compound Shapes:")
 {
 	Circle circle(5.0);
+	Rectangle rect(15.0 ,10.0);
 	SECTION("Rotated")
 	{
 		//Circle
-		Rotated shape1(make_shared<Circle> (circle), 0);
-		Rotated shape2(make_shared<Circle> (circle), 90);
-		Rotated shape3(make_shared<Circle> (circle), 180);
-		Rotated shape4(make_shared<Circle> (circle), 270);
+		Rotated shape1(circle, 0);
+		Rotated shape2(circle, 90);
+		Rotated shape3(circle, 180);
+		Rotated shape4(circle, 270);
 		//Rectangle
+		Rotated shape5(rect, 0);
+		Rotated shape6(rect, 90);
+		Rotated shape7(rect, 180);
+		Rotated shape8(rect, 270);
+
 
 		//Height
+		//Circle
 		REQUIRE(shape1.getHeight() == circle.getHeight());
 		REQUIRE(shape2.getHeight() == circle.getWidth());
 		REQUIRE(shape3.getHeight() == circle.getHeight());
 		REQUIRE(shape4.getHeight() == circle.getWidth());
 
 		//Width
+		//Circle
 		REQUIRE(shape1.getWidth() == circle.getWidth());
 		REQUIRE(shape2.getWidth() == circle.getHeight());
 		REQUIRE(shape3.getWidth() == circle.getWidth());
 		REQUIRE(shape4.getWidth() == circle.getHeight());
+		//Radius(exclusive to circle
 	}
 }
