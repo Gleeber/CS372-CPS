@@ -21,7 +21,6 @@ class Shape
 {
 public:
     Shape();
-    Shape(const Shape &s);
 
     pair<double, double> getCenter() const;
     double getHeight() const;
@@ -34,7 +33,7 @@ public:
     void openfile(const char filename[]);
     void closefile();
 
-    virtual string generatePostScript();
+    virtual string generatePostScript() const;
     void draw();
     string getFilename() const;
 
@@ -57,12 +56,11 @@ class Circle : public Shape
 {
 public:
     Circle();
-    Circle(const Circle &c);
     Circle(double radius);
 
     double getRadius() const;
 
-    virtual string generatePostScript() override;
+    virtual string generatePostScript() const override;
 
 private:
     double _radius;
@@ -78,7 +76,7 @@ public:
     Rectangle();
     Rectangle(double width, double height);
 
-    virtual string generatePostScript() override;
+    virtual string generatePostScript() const override;
 
 private:
 
@@ -92,12 +90,11 @@ class Polygon : public Shape
 {
 public:
     Polygon();
-    Polygon(const Polygon &p);
 
     int getNumSides() const;
     double getSideLength() const;
 
-    virtual string generatePostScript() override;
+    virtual string generatePostScript() const override;
 
 private:
     int _numberOfSides;
@@ -113,8 +110,11 @@ class Rotated : public Shape
 {
 public:
     Rotated(const Shape &shape, int rotationAngle);
-    //virtual string generatePostScript() override;
+
+    virtual string generatePostScript() const override;
+
 private:
+    const Shape & _shape;
     int _rotation;
 };
 

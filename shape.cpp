@@ -19,11 +19,6 @@ Shape::Shape():
     _center(306, 396), _height(72), _width(72), _filename("postScriptFile.ps")
 {}
 
-Shape::Shape(const Shape &s):
-    _center(s.getCenter()), _filename(s.getFilename()),
-    _height(s.getHeight()), _width(s.getWidth())
-{}
-
 pair<double, double> Shape::getCenter() const
 {
     return _center;
@@ -64,9 +59,9 @@ void Shape::closefile()
     file.close();
 }
 
-string Shape::generatePostScript()
+string Shape::generatePostScript() const
 {
-    return std::string();
+    return "Nothing to generate";
 }
 
 void Shape::draw()
@@ -90,10 +85,6 @@ Circle::Circle():
     _radius(getHeight() / 2)
 {}
 
-Circle::Circle(const Circle &c):
-    Shape(c), _radius(c.getRadius())
-{}
-
 Circle::Circle(double radius):
     _radius(radius)
 {
@@ -106,7 +97,7 @@ double Circle::getRadius() const
     return _radius;
 }
 
-string Circle::generatePostScript()
+string Circle::generatePostScript() const
 {
     return "newpath\n" +
             std::to_string(getCenter().first) + " " +
@@ -130,7 +121,7 @@ Rectangle::Rectangle(double width, double height)
     setHeight(height);
 }
 
-string Rectangle::generatePostScript()
+string Rectangle::generatePostScript() const
 {
     return "newpath\n"
             + std::to_string(getCenter().first) + " "
@@ -172,10 +163,6 @@ Polygon::Polygon():
     }
 }
 
-Polygon::Polygon(const Polygon &p):
-    Shape(p), _numberOfSides(p.getNumSides()), _sideLength(p.getSideLength())
-{}
-
 int Polygon::getNumSides() const
 {
     return _numberOfSides;
@@ -186,7 +173,7 @@ double Polygon::getSideLength() const
     return _sideLength;
 }
 
-string Polygon::generatePostScript()
+string Polygon::generatePostScript() const
 {
     return "newpath\n"
            + std::to_string(getCenter().first) + " "
@@ -209,7 +196,7 @@ string Polygon::generatePostScript()
 // Rotated class definitions
 // *********************************************************************
 
-Rotated::Rotated(const Shape &shape, int rotationAngle): Shape(shape), _rotation(rotationAngle)
+Rotated::Rotated(const Shape &shape, int rotationAngle): _shape(shape), _rotation(rotationAngle)
 {
     if(rotationAngle == 0 || rotationAngle == 180)
     {
@@ -222,4 +209,9 @@ Rotated::Rotated(const Shape &shape, int rotationAngle): Shape(shape), _rotation
         setHeight(getWidth());
     }
 
+}
+
+string Rotated::generatePostScript() const
+{
+    return _shape.generatePostScript();
 }

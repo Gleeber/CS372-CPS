@@ -6,9 +6,7 @@
 
 int main()
 {
-    Circle shape1;
-    shape1.setHeight(4);
-    Rectangle shape2(shape1);
-    std::cout << shape2.getHeight() << std::endl;
-    std::cout << shape1.getWidth() << std::endl;
+    Rectangle rectangle;
+    Rotated rotatedRectangle(rectangle, 90);
+    rotatedRectangle.draw();
 }
