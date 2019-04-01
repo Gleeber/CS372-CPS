@@ -10,6 +10,6 @@ int main()
     Square shape2(100);
     Polygon shape3(5,100);
     Circle circle(1);
-    Vertical combinedShape(shape1, shape2, shape3,circle);
+    Horizontal combinedShape(shape1, shape2, shape3,circle);
     combinedShape.draw();
 }

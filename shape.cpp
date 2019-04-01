@@ -363,5 +363,26 @@ void Horizontal::updateWidthAndHeight()
 
 string Horizontal::generatePostScript() const
 {
-    return "";
+    string postscriptOutput = "";
+    postscriptOutput += to_string(getCenter().first - getWidth() / 2) + " "
+                        + to_string(getCenter().second - getHeight() / 2) + " "
+                        + "moveto\n";
+
+    for (auto eachShapeReference : _shapeReferences)
+    {
+        const Shape & eachShape = eachShapeReference.get();
+        postscriptOutput += to_string(eachShape.getWidth() / 2) + " "
+                            + to_string(getHeight() / 2) + " "
+                            + "rmoveto\n";
+
+        postscriptOutput += eachShape.generatePostScript();
+
+        postscriptOutput += to_string(eachShape.getWidth()) + " "
+                            + to_string((eachShape.getHeight() - getHeight()) / 2) + " "
+                            + "rmoveto\n"
+                            + "\n";
+    }
+
+    postscriptOutput += "stroke\n";
+    return postscriptOutput;
 }
