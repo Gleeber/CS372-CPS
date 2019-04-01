@@ -101,6 +101,17 @@ private:
     double _sideLength;
 };
 
+// *********************************************************************
+// Spacer class definitions
+// *********************************************************************
+
+class Spacer : public Shape
+{
+public:
+    Spacer(double width, double height);
+
+    virtual string generatePostScript() const override;
+};
 
 // *********************************************************************
 // Rotated class
@@ -131,5 +142,7 @@ private:
      double _fy;
      const Shape & _shape;
  };
+
+
 
 #endif //CS372_CPS_SHAPE_H

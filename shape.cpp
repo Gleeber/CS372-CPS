@@ -187,6 +187,20 @@ string Polygon::generatePostScript() const
 }
 
 // *********************************************************************
+// Spacer class definitions
+// *********************************************************************
+
+Spacer::Spacer(double width, double height)
+{
+    setWidth(width);
+    setHeight(height);
+}
+string Spacer::generatePostScript() const
+{
+    return "Spacer";
+}
+
+// *********************************************************************
 // Rotated class definitions
 // *********************************************************************
 
