@@ -88,7 +88,10 @@ string Circle::generatePostScript() const
 {
     return  "currentpoint\n" +
             std::to_string(getRadius()) + " " +
-            "0 360 arc\n";
+            "0 360 arc closepath\n" +
+            to_string(-getWidth() / 2) + " " +
+            to_string(-getHeight() / 2) + " " +
+            "rmoveto\n";
 }
 
 // *********************************************************************
