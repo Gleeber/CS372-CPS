@@ -151,6 +151,17 @@ TEST_CASE("Test for Pentagon:") {
 		//REQUIRE(testDefaultPolygon.getWidth() == 72);
 	}
 }
+
+TEST_CASE("Test for Spacer:")
+{
+	SECTION("Test Spacer Constructor:")
+	{
+		Spacer testSpacer(10.0, 20.0);
+		REQUIRE(testSpacer.getHeight() == 20.0);
+		REQUIRE(testSpacer.getWidth() == 10.0);
+		REQUIRE(testSpacer.getCenter() == make_pair(306.0,396.0));
+	}
+}
 TEST_CASE("Compound Shapes:")
 {
 	Circle circle(5.0);
