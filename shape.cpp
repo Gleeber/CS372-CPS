@@ -342,3 +342,17 @@ string Vertical::generatePostScript() const
     postscriptOutput += "stroke\n";
     return postscriptOutput;
 }
+
+// *********************************************************************
+// Horizontal class definitions
+// *********************************************************************
+
+void Horizontal::updateWidthAndHeight()
+{
+
+}
+
+string Horizontal::generatePostScript() const
+{
+    return "";
+}
