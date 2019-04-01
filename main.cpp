@@ -7,6 +7,6 @@
 int main()
 {
     Rectangle rectangle;
-    Rotated rotatedRectangle(rectangle, 90);
-    rotatedRectangle.draw();
+    Rotated rotated(rectangle, 90);
+    rotated.draw();
 }
