@@ -118,4 +118,18 @@ private:
     int _rotation;
 };
 
+// *********************************************************************
+// Rotated class
+// *********************************************************************
+ class Scaled: public Shape
+ {
+ public:
+     Scaled(const Shape &shape, double fx, double fy);
+
+ private:
+     double fx;
+     double fy;
+     const Shape & _shape;
+ };
+
 #endif //CS372_CPS_SHAPE_H

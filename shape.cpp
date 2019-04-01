@@ -215,3 +215,12 @@ string Rotated::generatePostScript() const
 {
     return _shape.generatePostScript();
 }
+
+// *********************************************************************
+// Scaled class definitions
+// *********************************************************************
+
+Scaled::Scaled(const Shape &shape, double fx, double fy)
+{
+    
+}
