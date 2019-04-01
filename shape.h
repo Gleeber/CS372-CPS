@@ -127,8 +127,8 @@ private:
      Scaled(const Shape &shape, double fx, double fy);
 
  private:
-     double fx;
-     double fy;
+     double _fx;
+     double _fy;
      const Shape & _shape;
  };
 
