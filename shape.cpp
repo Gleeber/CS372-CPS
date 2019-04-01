@@ -169,8 +169,9 @@ int Polygon::getNumSides()
 // Rotated class definitions
 // *********************************************************************
 
-Rotated::Rotated(std::shared_ptr<Shape> shape, int rotationAngle): _shape(std::move(shape)), _rotation(rotationAngle)
+Rotated::Rotated(const Shape &shape, int rotationAngle): _rotation(rotationAngle)
 {
+    *this = shape;
     if(rotationAngle == 0 || rotationAngle == 180)
     {
         setWidth(getWidth());

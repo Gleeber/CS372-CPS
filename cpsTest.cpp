@@ -157,11 +157,22 @@ TEST_CASE("Compound Shapes:")
 	SECTION("Rotated")
 	{
 		//Circle
-		Rotated shape1(make_shared<Circle> circle, 0);
-		Rotated shape2(make_shared<Circle> circle, 90);
-		Rotated shape3(make_shared<Circle> circle, 180);
-		Rotated shape4(make_shared<Circle> circle, 270);
-		Rotated shape5(make_shared<Circle> circle, 360);
+		Rotated shape1(make_shared<Circle> (circle), 0);
+		Rotated shape2(make_shared<Circle> (circle), 90);
+		Rotated shape3(make_shared<Circle> (circle), 180);
+		Rotated shape4(make_shared<Circle> (circle), 270);
 		//Rectangle
+
+		//Height
+		REQUIRE(shape1.getHeight() == circle.getHeight());
+		REQUIRE(shape2.getHeight() == circle.getWidth());
+		REQUIRE(shape3.getHeight() == circle.getHeight());
+		REQUIRE(shape4.getHeight() == circle.getWidth());
+
+		//Width
+		REQUIRE(shape1.getWidth() == circle.getWidth());
+		REQUIRE(shape2.getWidth() == circle.getHeight());
+		REQUIRE(shape3.getWidth() == circle.getWidth());
+		REQUIRE(shape4.getWidth() == circle.getHeight());
 	}
 }

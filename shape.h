@@ -104,10 +104,9 @@ private:
 class Rotated : public Shape
 {
 public:
-    Rotated(std::shared_ptr<Shape> shape, int rotationAngle);
+    Rotated(const Shape &shape, int rotationAngle);
     //virtual string generatePostScript() override;
 private:
-    std::shared_ptr<Shape> _shape;
     int _rotation;
 };
 
