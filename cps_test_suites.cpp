@@ -15,8 +15,12 @@
 using std::make_pair;
 using std::make_shared;
 
-//#include <cmath>
-//using std::sqrt;
+#include <cmath>
+using std::sqrt;
+
+// *********************************************************************
+// Basic shape tests
+// *********************************************************************
 
 TEST_CASE("Test for Shape class:") {
 	SECTION("Test default constructor:")
@@ -87,9 +91,38 @@ TEST_CASE("Test for Circle class:")
 	}
 }
 
+TEST_CASE("Test for Polygon class:")
+{
+    SECTION("Test default constructor:")
+    {
+        Polygon testPolygon;
+        REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
+        REQUIRE(testPolygon.getHeight() == Approx(25 * sqrt(5 + 2 * sqrt(5))));
+        REQUIRE(testPolygon.getWidth() == Approx(25 * (1 + sqrt(5))));
+        REQUIRE(testPolygon.getNumSides() == 5);
+    }
+
+    SECTION("Test Polygon constructor with even number of sides:")
+    {
+        Polygon testPolygon(6, 82);
+        REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
+        REQUIRE(testPolygon.getHeight() == Approx (82 * sqrt(3)));
+        REQUIRE(testPolygon.getWidth() == Approx(164.0));
+        REQUIRE(testPolygon.getNumSides() == 6);
+    }
+
+    SECTION("Test Polygon constructor with divisible by 4 sides:")
+    {
+        Polygon testPolygon(8, 39);
+        REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
+        REQUIRE(testPolygon.getHeight() == Approx(94.1545232316));
+        REQUIRE(testPolygon.getWidth() == Approx(94.1545232316));
+        REQUIRE(testPolygon.getNumSides() == 8);
+    }
+}
+
 TEST_CASE("Test for Rectangle class:")
 {
-    /*
 	SECTION("Test default constructor:")
 	{
 		Rectangle testRectangle;
@@ -97,7 +130,6 @@ TEST_CASE("Test for Rectangle class:")
 		REQUIRE(testRectangle.getHeight() == 72);
 		REQUIRE(testRectangle.getWidth() == 144);
 	}
-    */
 	SECTION("Test constructor that takes width and height as parameters: ")
     {
 	    Rectangle testRectangle(96, 96);
@@ -106,34 +138,25 @@ TEST_CASE("Test for Rectangle class:")
     }
 }
 
-TEST_CASE("Test for Polygon class:")
+TEST_CASE("Test for Spacer:")
 {
-	SECTION("Test default constructor:")
-	{
-		Polygon testPolygon;
-		REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
-		REQUIRE(testPolygon.getHeight() == Approx(25 * sqrt(5 + 2 * sqrt(5))));
-		REQUIRE(testPolygon.getWidth() == Approx(25 * (1 + sqrt(5))));
-		REQUIRE(testPolygon.getNumSides() == 5);
-	}
+    SECTION("Test Spacer Constructor:")
+    {
+        Spacer testSpacer(10.0, 20.0);
+        REQUIRE(testSpacer.getHeight() == 20.0);
+        REQUIRE(testSpacer.getWidth() == 10.0);
+        REQUIRE(testSpacer.getCenter() == make_pair(306.0,396.0));
+    }
+}
 
-	SECTION("Test Polygon constructor with even number of sides:")
-	{
-		Polygon testPolygon(6, 82);
-		REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
-		REQUIRE(testPolygon.getHeight() == Approx (82 * sqrt(3)));
-		REQUIRE(testPolygon.getWidth() == Approx(164.0));
-		REQUIRE(testPolygon.getNumSides() == 6);
-	}
-
-	SECTION("Test Polygon constructor with divisible by 4 sides:")
-	{
-		Polygon testPolygon(8, 39);
-		REQUIRE(testPolygon.getCenter() == make_pair(306.0, 396.0));
-		REQUIRE(testPolygon.getHeight() == Approx(94.1545232316));
-		REQUIRE(testPolygon.getWidth() == Approx(94.1545232316));
-		REQUIRE(testPolygon.getNumSides() == 8);
-	}
+TEST_CASE("Test for Square:") {
+    SECTION("Test default constructor")
+    {
+        Square testSquare(61);
+        REQUIRE(testSquare.getCenter() == make_pair(306.0, 396.0));
+        REQUIRE(testSquare.getHeight() == Approx(61.0));
+        REQUIRE(testSquare.getWidth() == Approx(61.0));
+    }
 }
 
 TEST_CASE("Test for Triangle:") {
@@ -146,26 +169,10 @@ TEST_CASE("Test for Triangle:") {
 	}
 }
 
-TEST_CASE("Test for Square:") {
-	SECTION("Test default constructor")
-	{
-		Square testSquare(61);
-		REQUIRE(testSquare.getCenter() == make_pair(306.0, 396.0));
-		REQUIRE(testSquare.getHeight() == Approx(61.0));
-		REQUIRE(testSquare.getWidth() == Approx(61.0));
-	}
-}
 
-TEST_CASE("Test for Spacer:")
-{
-	SECTION("Test Spacer Constructor:")
-	{
-		Spacer testSpacer(10.0, 20.0);
-		REQUIRE(testSpacer.getHeight() == 20.0);
-		REQUIRE(testSpacer.getWidth() == 10.0);
-		REQUIRE(testSpacer.getCenter() == make_pair(306.0,396.0));
-	}
-}
+// *********************************************************************
+// Compound shape tests
+// *********************************************************************
 
 TEST_CASE("Tests for Rotated shapes:")
 {
@@ -200,4 +207,25 @@ TEST_CASE("Tests for Rotated shapes:")
 		REQUIRE(shape4.getWidth() == circle.getHeight());
 		//Radius(exclusive to circle
 	}
+}
+
+TEST_CASE("Tests for Scaled shapes")
+{
+    Polygon pentagon(5,50);
+    Scaled scaledPentagon(pentagon, 2,.3);
+
+    REQUIRE(scaledPentagon.getWidth() == Approx(pentagon.getWidth() * 2));
+    REQUIRE(scaledPentagon.getHeight() == Approx(pentagon.getHeight() * 0.3));
+}
+
+TEST_CASE("Tests for Layered shapes")
+{
+    Square testSquare(81);
+    Circle testCircle(40);
+    Triangle testTriangle(73);
+
+    Layered testLayered(testSquare, testCircle, testTriangle);
+
+    REQUIRE( testLayered.getHeight() == Approx( testSquare.getHeight() ) );
+    REQUIRE( testLayered.getWidth()  == Approx( testSquare.getWidth()  ) );
 }
