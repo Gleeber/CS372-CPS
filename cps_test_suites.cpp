@@ -5,16 +5,18 @@
 
 //Test File for CPS (C++ to PostScript)
 
-#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_FAST_COMPILE
+
 #include "catch.hpp"
 #include "shape.h"
 #include "CompoundShape.h"
+
 #include <utility>
 using std::make_pair;
-#include <cmath>
-using std::sqrt;
 using std::make_shared;
+
+//#include <cmath>
+//using std::sqrt;
 
 TEST_CASE("Test for Shape class:") {
 	SECTION("Test default constructor:")
@@ -87,6 +89,7 @@ TEST_CASE("Test for Circle class:")
 
 TEST_CASE("Test for Rectangle class:")
 {
+    /*
 	SECTION("Test default constructor:")
 	{
 		Rectangle testRectangle;
@@ -94,6 +97,7 @@ TEST_CASE("Test for Rectangle class:")
 		REQUIRE(testRectangle.getHeight() == 72);
 		REQUIRE(testRectangle.getWidth() == 144);
 	}
+    */
 	SECTION("Test constructor that takes width and height as parameters: ")
     {
 	    Rectangle testRectangle(96, 96);

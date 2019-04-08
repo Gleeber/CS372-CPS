@@ -5,7 +5,6 @@
 #ifndef CS372_CPS_SHAPE_H
 #define CS372_CPS_SHAPE_H
 
-#include <iostream>
 #include <fstream>
 #include <utility>
 using std::pair;

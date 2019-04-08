@@ -9,6 +9,7 @@ int main()
 {
     Triangle shape1(100);
     Square shape2(100);
+    Rectangle defaultRectangle;
     Rectangle rectangle(40,70);
     Polygon shape3(5,100);
     Spacer spacer(20,45);
