@@ -17,6 +17,7 @@ class Rotated : public Shape
 public:
     Rotated(const Shape &shape, int rotationAngle);
 
+    //virtual string generatePostScript() const override;
     virtual string generatePostScript() const override;
 
 private:
@@ -58,6 +59,7 @@ public:
 
     void updateWidthAndHeight();
 
+    //virtual string generatePostScript() const override;
     virtual string generatePostScript() const override;
 
 private:

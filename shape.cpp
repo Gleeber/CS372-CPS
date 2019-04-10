@@ -5,6 +5,8 @@
 //
 
 #include "shape.h"
+#include "util.h"
+
 #include <iostream>
 using std::ofstream;
 #include <cmath>
@@ -67,12 +69,11 @@ Shape::Shape():
     {
         ofstream postScriptOutput;
         postScriptOutput.open (_filename);
-        postScriptOutput << "newpath\n"
-                            + to_string(getCenter().first) + " "
+        postScriptOutput << to_string(getCenter().first) + " "
                             + to_string(getCenter().second) + " "
-                            + "moveto\n\n";
+                            + "translate\n\n";
         postScriptOutput << generatePostScript();
-        postScriptOutput << "stroke\n\nshowpage";
+        postScriptOutput << "\nshowpage";
         postScriptOutput.close();
     }
 
@@ -96,14 +97,19 @@ double Circle::getRadius() const
     return _radius;
 }
 
+/*
 string Circle::generatePostScript() const
 {
-    return  "currentpoint\n" +
-            std::to_string(getRadius()) + " " +
-            "0 360 arc closepath\n" +
-            to_string(-getWidth() / 2) + " " +
-            to_string(-getHeight() / 2) + " " +
-            "rmoveto\n";
+    return  generatePostScript(getCenter().first, getCenter().second);
+}
+ */
+
+string Circle::generatePostScript() const
+{
+    return "0 0 "
+           + std::to_string(getRadius()) + " "
+           + "0 360 arc\n"
+           + "stroke\n";
 }
 
 // *********************************************************************
@@ -123,20 +129,19 @@ Rectangle::Rectangle(double width, double height)
 
 string Rectangle::generatePostScript() const
 {
-    return  std::to_string(-getWidth()/2) + " "
-            + std::to_string(-getHeight()/2) + " "
-            + "rmoveto\n"
+    return "newpath\n"
 
-            + std::to_string(getWidth()) + " 0 rlineto\n"
-            + "0 " + std::to_string(getHeight()) + " rlineto\n"
-            + "-" + std::to_string(getWidth()) + " 0 rlineto\n"
-            + "0 -" + std::to_string(getHeight()) + " rlineto\n"
+           + std::to_string(-getWidth()/2) + " "
+           + std::to_string(-getHeight()/2) + " "
+           + "moveto\n"
 
-            + std::to_string(getWidth()/2) + " "
-            + std::to_string(getHeight()/2) + " "
-            + "rmoveto\n";
+           + std::to_string(getWidth()) + " 0 rlineto\n"
+           + "0 " + std::to_string(getHeight()) + " rlineto\n"
+           + "-" + std::to_string(getWidth()) + " 0 rlineto\n"
+           + "0 -" + std::to_string(getHeight()) + " rlineto\n"
 
-
+           + "closepath\n"
+           + "stroke\n";
 }
 
 // *********************************************************************
@@ -188,17 +193,18 @@ double Polygon::getSideLength() const
 
 string Polygon::generatePostScript() const
 {
-    return   "-" + std::to_string(getWidth() / 2)
-           + " -" + std::to_string(getHeight() / 2) + " rmoveto\n"
-
-           + to_string((getWidth() - _sideLength) / 2) + " 0 rmoveto\n"
+    return "newpath\n"
+           + std::to_string( - _sideLength / 2) + " "
+           + std::to_string(- getHeight() / 2) + " moveto\n"
 
            + "1 1 " + to_string(_numberOfSides) + " {\n"
            + to_string(_sideLength) + " 0 rlineto\n"
-           + to_string(360 / _numberOfSides) + " rotate\n"
+           + to_string(360.0 / _numberOfSides) + " rotate\n"
            + "} for\n"
            + "clear\n"
-           + to_string((_sideLength - getWidth()) / 2) + " 0 rmoveto\n";
+
+           + "closepath\n"
+           + "stroke\n";
 }
 
 // *********************************************************************
@@ -229,7 +235,82 @@ Spacer::Spacer(double width, double height)
 
 string Spacer::generatePostScript() const
 {
-    return to_string(- getWidth() / 2) + " "
-         + to_string(- getHeight() / 2) + " "
-         + "rmoveto\n";
+    return "";
+}
+
+// *********************************************************************
+// Spacer class definitions
+// *********************************************************************
+
+Asterisk::Asterisk(int numberOfArms, double armLength):
+    _numberOfArms(numberOfArms), _armLength(armLength),
+    _innerShape(Polygon(numberOfArms,armLength * 2/3))
+{
+    double endOfArm = _armLength * sin(180.0 / _numberOfArms);
+    double height = 0, width = 0;
+    if (_numberOfArms % 2 != 0) //Case 1: n is odd.
+    {
+        height = _innerShape.getHeight() + _armLength
+               + _armLength * (cos(M_PI / _numberOfArms));
+        if (_numberOfArms > 3)
+        {
+            width = _innerShape.getWidth()
+                    + 2 * _armLength * cos(M_PI / 180 * (90.0 - (floor(_numberOfArms / 4)) * (360 / _numberOfArms)));
+        }
+
+        else
+        {
+            width = _innerShape.getWidth()
+                    + 2 * _armLength * cos(M_PI / 180 * (90.0 - (180 / _numberOfArms)));
+        }
+
+    }
+
+    else if (_numberOfArms % 4 == 0) // Case 2: n is divisible by 4.
+    {
+        height = _innerShape.getHeight() + 2 * _armLength;
+        width = _innerShape.getWidth() + 2 * _armLength;
+    }
+
+    else  //case 3: n is divisible by 2, but not 4.
+    {
+        height = _innerShape.getHeight() + 2 * _armLength;
+        width = _innerShape.getWidth()
+              + 2 * _armLength * cos(M_PI / _numberOfArms);
+    }
+
+    setHeight(height);
+    setWidth(width);
+}
+
+string Asterisk::generatePostScript() const
+{
+    string outputString = "";
+    outputString += "newpath\n";
+
+    if (_numberOfArms % 2 != 2)
+    {
+        outputString += "180 rotate\n";
+    }
+
+    outputString += std::to_string( -_innerShape.getSideLength() / 2) + " "
+           + std::to_string(- (getHeight() / 2 - _armLength)) + " "
+           + "moveto\n"
+
+           + "0 1 " + to_string(_numberOfArms) + " { \n"
+           + "    0 " + to_string(-_armLength) + " rlineto\n"
+           + "    " + to_string( _armLength * 2.0 / 3.0) + " 0 rlineto\n"
+           + "    0 " + to_string(_armLength) + " rlineto\n"
+
+           + "    " + to_string(360.0 / _numberOfArms) + " rotate\n"
+           + "} for\n"
+           + "clear\n"
+           + "stroke\n";
+
+    return outputString;
+}
+
+const Polygon & Asterisk::getInnerShape()
+{
+    return _innerShape;
 }

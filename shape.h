@@ -140,4 +140,23 @@ public:
     virtual string generatePostScript() const override;
 };
 
+// *********************************************************************
+// Asterisk class
+// *********************************************************************
+
+class Asterisk : public Shape
+{
+public:
+    Asterisk(int numberOfArms, double armLength);
+
+    const Polygon & getInnerShape();
+
+    virtual string generatePostScript() const override;
+
+private:
+    const Polygon _innerShape;
+    int _numberOfArms;
+    double _armLength;
+};
+
 #endif //CS372_CPS_SHAPE_H
