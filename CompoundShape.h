@@ -18,7 +18,7 @@ public:
     Rotated(const Shape &shape, int rotationAngle);
 
     //virtual string generatePostScript() const override;
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 
 private:
     const Shape & _shape;
@@ -34,7 +34,7 @@ class Scaled: public Shape
 public:
     Scaled(const Shape &shape, double fx, double fy);
 
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 
 private:
     double _scaleFactorX;
@@ -51,7 +51,7 @@ class Layered : public Shape
 public:
     template <typename Arg, typename... Ts,
             typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
-    Layered(Arg &i, Ts &... all)
+    explicit Layered(Arg &i, Ts &... all)
     {
         _shapeReferences = {i, all... };
         updateWidthAndHeight();
@@ -60,7 +60,7 @@ public:
     void updateWidthAndHeight();
 
     //virtual string generatePostScript() const override;
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 
 private:
     vector<reference_wrapper<const Shape>> _shapeReferences;
@@ -75,7 +75,7 @@ class Vertical : public Shape
 public:
     template <typename Arg, typename... Ts,
             typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
-    Vertical(Arg &i, Ts &... all)
+    explicit Vertical(Arg &i, Ts &... all)
     {
         _shapeReferences = {i, all... };
         updateWidthAndHeight();
@@ -83,7 +83,7 @@ public:
 
     void updateWidthAndHeight();
 
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 
 private:
     vector<reference_wrapper<const Shape>> _shapeReferences;
@@ -98,7 +98,7 @@ class Horizontal : public Shape
 public:
     template <typename Arg, typename... Ts,
             typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
-    Horizontal(Arg &i, Ts &... all)
+    explicit Horizontal(Arg &i, Ts &... all)
     {
         _shapeReferences = {i, all... };
         updateWidthAndHeight();
@@ -106,7 +106,7 @@ public:
 
     void updateWidthAndHeight();
 
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 
 private:
     vector<reference_wrapper<const Shape>> _shapeReferences;

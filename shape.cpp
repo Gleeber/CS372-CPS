@@ -245,7 +245,6 @@ Asterisk::Asterisk(int numberOfArms, double armLength):
     _numberOfArms(numberOfArms), _armLength(armLength),
     _innerShape(Polygon(numberOfArms,armLength * 2/3))
 {
-    double endOfArm = _armLength * sin(180.0 / _numberOfArms);
     double height = 0, width = 0;
     if (_numberOfArms % 2 != 0) //Case 1: n is odd.
     {
@@ -254,13 +253,13 @@ Asterisk::Asterisk(int numberOfArms, double armLength):
         if (_numberOfArms > 3)
         {
             width = _innerShape.getWidth()
-                    + 2 * _armLength * cos(M_PI / 180 * (90.0 - (floor(_numberOfArms / 4)) * (360 / _numberOfArms)));
+                    + 2 * _armLength * cos(M_PI / 180 * (90.0 - (floor(_numberOfArms / 4.0)) * (360.0 / _numberOfArms)));
         }
 
         else
         {
             width = _innerShape.getWidth()
-                    + 2 * _armLength * cos(M_PI / 180 * (90.0 - (180 / _numberOfArms)));
+                    + 2 * _armLength * cos(M_PI / 180 * (90.0 - (180.0 / _numberOfArms)));
         }
 
     }
@@ -284,7 +283,7 @@ Asterisk::Asterisk(int numberOfArms, double armLength):
 
 string Asterisk::generatePostScript() const
 {
-    string outputString = "";
+    string outputString;
     outputString += "newpath\n";
 
     if (_numberOfArms % 2 != 2)

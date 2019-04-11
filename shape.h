@@ -42,9 +42,6 @@ public:
     virtual string generatePostScript() const;
     void draw();
 
-protected:
-    std::ofstream file;
-
 private:
     pair<double, double> _center;
     double _height;
@@ -61,11 +58,12 @@ class Circle : public Shape
 {
 public:
     Circle();
-    Circle(double radius);
+
+    explicit Circle(double radius);
 
     double getRadius() const;
 
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 
 private:
     double _radius;
@@ -81,7 +79,7 @@ public:
     Rectangle();
     Rectangle(double width, double height);
 
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 
 private:
 
@@ -102,7 +100,7 @@ public:
     int getNumSides() const;
     double getSideLength() const;
 
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 
 private:
     int _numberOfSides;
@@ -115,7 +113,7 @@ private:
 class Triangle: public Polygon
 {
 public:
-    Triangle(double sideLength);
+    explicit Triangle(double sideLength);
 };
 
 // *********************************************************************
@@ -125,7 +123,7 @@ public:
 class Square: public Polygon
 {
 public:
-    Square(double sidelength);
+    explicit Square(double sidelength);
 };
 
 // *********************************************************************
@@ -137,7 +135,7 @@ class Spacer : public Shape
 public:
     Spacer(double width, double height);
 
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 };
 
 // *********************************************************************
@@ -151,7 +149,7 @@ public:
 
     const Polygon & getInnerShape();
 
-    virtual string generatePostScript() const override;
+    string generatePostScript() const override;
 
 private:
     const Polygon _innerShape;

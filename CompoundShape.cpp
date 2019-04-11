@@ -98,7 +98,7 @@ string Layered::generatePostScript() const
 
 string Layered::generatePostScript() const
 {
-    string postscriptOutput = "";
+    string postscriptOutput;
 
     for (auto eachShapeReference : _shapeReferences)
     {
@@ -143,7 +143,7 @@ void Vertical::updateWidthAndHeight()
 
 string Vertical::generatePostScript() const
 {
-    string postscriptOutput = "";
+    string postscriptOutput;
     postscriptOutput += "0 "
                         + to_string( - getHeight() / 2) + " "
                         + "translate\n";
@@ -188,7 +188,7 @@ void Horizontal::updateWidthAndHeight()
 
 string Horizontal::generatePostScript() const
 {
-    string postscriptOutput = "";
+    string postscriptOutput;
     postscriptOutput += to_string( - getWidth() / 2) + " "
                         + "0 "
                         + "translate\n";
