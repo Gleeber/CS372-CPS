@@ -5,7 +5,6 @@
 //
 
 #include "shape.h"
-#include "util.h"
 
 #include <iostream>
 using std::ofstream;

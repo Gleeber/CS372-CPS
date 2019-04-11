@@ -4,7 +4,6 @@
 
 #include "shape.h"
 #include "CompoundShape.h"
-#include "util.h"
 
 #include <cmath>
 using std::sin;
