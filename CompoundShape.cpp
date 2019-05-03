@@ -75,18 +75,34 @@ string Scaled::generatePostScript() const
 // Layered class definitions
 // *********************************************************************
 
-void Layered::updateWidthAndHeight()
+void MultipleShapes::updateWidthAndHeight()
 {
-    double maxWidth = 0, maxHeight = 0;
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-        maxWidth = max(maxWidth, eachShape.getWidth());
-        maxHeight = max(maxHeight, eachShape.getHeight());
+    double width = 0, height = 0;
+    if (multipleType == "Layered") {
+        for (auto eachShapeReference : _shapeReferences) {
+            const Shape &eachShape = eachShapeReference.get();
+            width = max(width, eachShape.getWidth());
+            height = max(height, eachShape.getHeight());
+        }
     }
-
-    setWidth(maxWidth);
-    setHeight(maxHeight);
+    if(multipleType == "Vertical"){
+        for (auto eachShapeReference : _shapeReferences)
+        {
+            const Shape & eachShape = eachShapeReference.get();
+            width = max(width, eachShape.getWidth());
+            height += eachShape.getHeight();
+        }
+    }
+    if(multipleType == "Horizontal"){
+        for (auto eachShapeReference : _shapeReferences)
+        {
+            const Shape & eachShape = eachShapeReference.get();
+            height = max(height, eachShape.getHeight());
+            width += eachShape.getWidth();
+        }
+    }
+    setWidth(width);
+    setHeight(height);
 }
 
 /*
@@ -96,119 +112,54 @@ string Layered::generatePostScript() const
 }
  */
 
-string Layered::generatePostScript() const
+string MultipleShapes::generatePostScript() const
 {
     string postscriptOutput;
-
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-
-        postscriptOutput += "gsave\n"
-                          + eachShape.generatePostScript();
-
-        postscriptOutput += "grestore\n\n";
-
-        /*
-        postscriptOutput += to_string(eachShape.getWidth() / 2) + " "
-                            + to_string(eachShape.getHeight() / 2) + " "
-                            + "rmoveto\n";
-                            */
+    if(multipleType == "Layered") {
+        for (auto eachShapeReference : _shapeReferences) {
+            const Shape &eachShape = eachShapeReference.get();
+            postscriptOutput += "gsave\n"
+                                + eachShape.generatePostScript();
+            postscriptOutput += "grestore\n\n";
+        }
     }
-    /*
-    postscriptOutput += to_string(- getWidth() / 2) + " "
-                        + to_string(- getHeight() / 2) + " "
-                        + "rmoveto\n";
-                        */
-    return postscriptOutput;
-}
-
-// *********************************************************************
-// Vertical class definitions
-// *********************************************************************
-
-void Vertical::updateWidthAndHeight()
-{
-    double width = 0, height = 0;
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-        width = max(width, eachShape.getWidth());
-        height += eachShape.getHeight();
-    }
-
-    setWidth(width);
-    setHeight(height);
-}
-
-string Vertical::generatePostScript() const
-{
-    string postscriptOutput;
-    postscriptOutput += "0 "
-                        + to_string( - getHeight() / 2) + " "
-                        + "translate\n";
-
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
+    if(multipleType=="Vertical"){
         postscriptOutput += "0 "
-                            + to_string(eachShape.getHeight() / 2) + " "
+                            + to_string( - getHeight() / 2) + " "
                             + "translate\n";
-
-        postscriptOutput += "gsave\n"
-                            + eachShape.generatePostScript();
-
-        postscriptOutput += "grestore\n\n";
-
-        postscriptOutput += "0 "
-                            + to_string(eachShape.getHeight() / 2) + " "
-                            + "translate\n"
-                            + "\n";
+        for (auto eachShapeReference : _shapeReferences)
+        {
+            const Shape & eachShape = eachShapeReference.get();
+            postscriptOutput += "0 "
+                                + to_string(eachShape.getHeight() / 2) + " "
+                                + "translate\n";
+            postscriptOutput += "gsave\n"
+                                + eachShape.generatePostScript();
+            postscriptOutput += "grestore\n\n";
+            postscriptOutput += "0 "
+                                + to_string(eachShape.getHeight() / 2) + " "
+                                + "translate\n"
+                                + "\n";
+        }
     }
-    return postscriptOutput;
-}
-
-// *********************************************************************
-// Horizontal class definitions
-// *********************************************************************
-
-void Horizontal::updateWidthAndHeight()
-{
-    double width = 0, height = 0;
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-        height = max(height, eachShape.getHeight());
-        width += eachShape.getWidth();
-    }
-
-    setWidth(width);
-    setHeight(height);
-}
-
-string Horizontal::generatePostScript() const
-{
-    string postscriptOutput;
-    postscriptOutput += to_string( - getWidth() / 2) + " "
-                        + "0 "
-                        + "translate\n";
-
-    for (auto eachShapeReference : _shapeReferences)
-    {
-        const Shape & eachShape = eachShapeReference.get();
-        postscriptOutput += to_string(eachShape.getWidth() / 2) + " "
+    if(multipleType=="Horizontal"){
+        postscriptOutput += to_string( - getWidth() / 2) + " "
                             + "0 "
                             + "translate\n";
-
-        postscriptOutput += "gsave\n"
-                            + eachShape.generatePostScript();
-
-        postscriptOutput += "grestore\n\n";
-
-        postscriptOutput += to_string(eachShape.getWidth() / 2) + " "
-                            + "0 "
-                            + "translate\n"
-                            + "\n";
+        for (auto eachShapeReference : _shapeReferences)
+        {
+            const Shape & eachShape = eachShapeReference.get();
+            postscriptOutput += to_string(eachShape.getWidth() / 2) + " "
+                                + "0 "
+                                + "translate\n";
+            postscriptOutput += "gsave\n"
+                                + eachShape.generatePostScript();
+            postscriptOutput += "grestore\n\n";
+            postscriptOutput += to_string(eachShape.getWidth() / 2) + " "
+                                + "0 "
+                                + "translate\n"
+                                + "\n";
+        }
     }
     return postscriptOutput;
 }

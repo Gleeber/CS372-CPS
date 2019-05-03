@@ -4,6 +4,8 @@
 
 #include "shape.h"
 #include "CompoundShape.h"
+#include <string>
+using std::string;
 
 #include <iostream>
 using std::cout;
@@ -20,16 +22,15 @@ int main()
     Square shape4(100);
     Circle circle(45);
     Rotated rotatedRectangle(rectangle,90);
-    Layered combinedShape(shape1, shape2, rotatedRectangle, shape3);
-    Vertical combinedShape2(combinedShape, spacer, rectangle, shape4, shape4);
-    Horizontal combinedShape3(combinedShape,combinedShape2);
+    //MultipleShapes combinedShape2(combinedShape, spacer, rectangle, shape4, shape4,string("Vertical"));
+    //MultipleShapes combinedShape3(combinedShape,combinedShape2,string("Horizontal"));
 
     Asterisk asterisk(6,60);
-    Vertical verticalAsterisk(shape2,asterisk,shape2);
-    Horizontal horizontalAsterisk(shape2,verticalAsterisk,shape2);
-    horizontalAsterisk.draw();
+    //MultipleShapes verticalAsterisk(shape2,asterisk,shape2,"Vertical");
+    //MultipleShapes horizontalAsterisk(shape2,verticalAsterisk,shape2,"Horizontal");
+    //horizontalAsterisk.draw();
 }
-
+/*
 int mainj()
 {
     Polygon heptagon(7,80);
@@ -38,7 +39,8 @@ int mainj()
     Rectangle rectangle(60,120);
     Rotated rotatedHeptagon(heptagon,90);
     Scaled scaledCircle(circle,1.8,.7);
-    Horizontal modifiedShape(rotatedHeptagon,scaledCircle,circle,square);
+    MultipleShapes modifiedShape(rotatedHeptagon,scaledCircle,circle,square, "Horizontal");
     Scaled scaledCombined(modifiedShape,.7,2.3);
     scaledCombined.draw();
 }
+*/

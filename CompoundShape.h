@@ -46,12 +46,12 @@ private:
 // Layered class
 // *********************************************************************
 
-class Layered : public Shape
+class MultipleShapes : public Shape
 {
 public:
     template <typename Arg, typename... Ts,
             typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
-    explicit Layered(Arg &i, Ts &... all)
+    explicit MultipleShapes(Arg &i, Ts &... all, string multipleType)
     {
         _shapeReferences = {i, all... };
         updateWidthAndHeight();
@@ -64,52 +64,13 @@ public:
 
 private:
     vector<reference_wrapper<const Shape>> _shapeReferences;
+    string multipleType;
 };
 
 // *********************************************************************
 // Vertical class
 // *********************************************************************
 
-class Vertical : public Shape
-{
-public:
-    template <typename Arg, typename... Ts,
-            typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
-    explicit Vertical(Arg &i, Ts &... all)
-    {
-        _shapeReferences = {i, all... };
-        updateWidthAndHeight();
-    }
 
-    void updateWidthAndHeight();
-
-    string generatePostScript() const override;
-
-private:
-    vector<reference_wrapper<const Shape>> _shapeReferences;
-};
-
-// *********************************************************************
-// Horizontal class
-// *********************************************************************
-
-class Horizontal : public Shape
-{
-public:
-    template <typename Arg, typename... Ts,
-            typename enable_if<is_base_of<Shape,Arg>::value>::type * = nullptr>
-    explicit Horizontal(Arg &i, Ts &... all)
-    {
-        _shapeReferences = {i, all... };
-        updateWidthAndHeight();
-    }
-
-    void updateWidthAndHeight();
-
-    string generatePostScript() const override;
-
-private:
-    vector<reference_wrapper<const Shape>> _shapeReferences;
-};
 
 #endif //CPS_COMPOUNDSHAPE_H
