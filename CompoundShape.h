@@ -43,10 +43,28 @@ private:
 };
 
 // *********************************************************************
+// CompoundShape class
+// *********************************************************************
+
+class CompoundShape : public Shape
+{
+public:
+    string generatePostScript() const override;
+
+    virtual string moveByShape(Shape shapeToMoveBy) const;
+    virtual string moveToStartPosition() const;
+
+protected:
+    vector<reference_wrapper<const Shape>> _shapeReferences;
+
+private:
+};
+
+// *********************************************************************
 // Layered class
 // *********************************************************************
 
-class Layered : public Shape
+class Layered : public CompoundShape
 {
 public:
     template <typename Arg, typename... Ts,
@@ -60,17 +78,17 @@ public:
     void updateWidthAndHeight();
 
     //virtual string generatePostScript() const override;
-    string generatePostScript() const override;
+    //string translate(double lengthToTranslate) const override;
+    //string generatePostScript() const override;
 
 private:
-    vector<reference_wrapper<const Shape>> _shapeReferences;
 };
 
 // *********************************************************************
 // Vertical class
 // *********************************************************************
 
-class Vertical : public Shape
+class Vertical : public CompoundShape
 {
 public:
     template <typename Arg, typename... Ts,
@@ -83,17 +101,18 @@ public:
 
     void updateWidthAndHeight();
 
-    string generatePostScript() const override;
+    string moveByShape(Shape shapeToMoveBy) const override;
+    string moveToStartPosition() const override;
+    //string generatePostScript() const override;
 
 private:
-    vector<reference_wrapper<const Shape>> _shapeReferences;
 };
 
 // *********************************************************************
 // Horizontal class
 // *********************************************************************
 
-class Horizontal : public Shape
+class Horizontal : public CompoundShape
 {
 public:
     template <typename Arg, typename... Ts,
@@ -106,10 +125,11 @@ public:
 
     void updateWidthAndHeight();
 
-    string generatePostScript() const override;
+    string moveByShape(Shape shapeToMoveBy) const override;
+    string moveToStartPosition() const override;
+    //string generatePostScript() const override;
 
 private:
-    vector<reference_wrapper<const Shape>> _shapeReferences;
 };
 
 #endif //CPS_COMPOUNDSHAPE_H
