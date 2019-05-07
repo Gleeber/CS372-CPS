@@ -17,7 +17,6 @@ class Rotated : public Shape
 public:
     Rotated(const Shape &shape, int rotationAngle);
 
-    //virtual string generatePostScript() const override;
     string generatePostScript() const override;
 
 private:
@@ -77,9 +76,6 @@ public:
 
     void updateWidthAndHeight();
 
-    //virtual string generatePostScript() const override;
-    //string translate(double lengthToTranslate) const override;
-    //string generatePostScript() const override;
 
 private:
 };
@@ -103,7 +99,6 @@ public:
 
     string moveByShape(Shape shapeToMoveBy) const override;
     string moveToStartPosition() const override;
-    //string generatePostScript() const override;
 
 private:
 };
@@ -127,7 +122,6 @@ public:
 
     string moveByShape(Shape shapeToMoveBy) const override;
     string moveToStartPosition() const override;
-    //string generatePostScript() const override;
 
 private:
 };
